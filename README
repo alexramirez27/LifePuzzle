@@ -25,6 +25,9 @@ finally go to
 git -> push to send the changes to the cloud so we can all pull them later
 
 when pushing make sure you are pushing to sprint 1. If it does not show up go to
+git -> fetch
+
+then
 
 git -> branches -> sprint1 -> push
 
