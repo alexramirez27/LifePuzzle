@@ -1,1 +1,30 @@
-test
+# LifePuzzle
+<H1> How to clone repository in Android Studio </H1>
+
+In Android Studio go to:
+
+File -> New -> Project from version control
+
+URL: https://csil-git1.cs.surrey.sfu.ca/mjfische/life_puzzle
+
+Then Select Clone
+
+
+<H1> How to use git in android studio </H1>
+
+Before you start coding each day make sure you pull -> origin / sprint#
+
+After you are finished coding for the day go to
+Git -> Commit
+
+Select the files you want to change
+write a comment about what you worked on.
+
+Then press commit
+
+finally go to 
+git -> push to send the changes to the cloud so we can all pull them later
+
+when pushing make sure you are pushing to sprint 1. If it does not show up go to
+
+git -> branches -> sprint1 -> push
