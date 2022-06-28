@@ -27,3 +27,7 @@ git -> push to send the changes to the cloud so we can all pull them later
 when pushing make sure you are pushing to sprint 1. If it does not show up go to
 
 git -> branches -> sprint1 -> push
+
+for help with git branches try looking at
+https://stackoverflow.com/questions/32695471/how-to-change-git-branch-in-android-studio
+
