@@ -11,7 +11,12 @@ Then Select Clone
 
 How to use git in android studio
 -----------------------------------------------------------------------------
-Before you start coding each day make sure you pull -> origin / sprint#
+Before you start coding each day make sure you pull -> origin / feature_name
+
+if the feature branch does not exist create on gitlab by going to the projects main page
+
+selecting + button -> new branch 
+name the branch the features name and put it under sprint#
 
 After you are finished coding for the day go to
 Git -> Commit
@@ -21,16 +26,29 @@ write a comment about what you worked on.
 
 Then press commit
 
-finally go to 
-git -> push to send the changes to the cloud so we can all pull them later
+finally we will push our changes to the cloud
 
-when pushing make sure you are pushing to sprint 1. If it does not show up go to
+when pushing make sure you are pushing to feature_name. If it does not show up go to
 git -> fetch
 
-then
+finally to push go to
 
-git -> branches -> sprint1 -> push
+git -> branches -> sprint1 -> push 
+
+
 
 for help with git branches try looking at
 https://stackoverflow.com/questions/32695471/how-to-change-git-branch-in-android-studio
 
+
+When you are done with a feature branch
+-----------------------------------------------------------------------------
+
+go to gitlab -> feature_name branch
+
+select 'Create merge request' button on the right side of the screen
+Assignee: your_name
+Reviewer: mjfische
+Milestone: sprint#
+
+then 'create merge request' button
