@@ -1,6 +1,6 @@
 # LifePuzzle
-<H1> How to clone repository in Android Studio </H1>
-
+How to clone repository in Android Studio
+-----------------------------------------------------------------------------
 In Android Studio go to:
 
 File -> New -> Project from version control
@@ -9,9 +9,8 @@ URL: https://csil-git1.cs.surrey.sfu.ca/mjfische/life_puzzle
 
 Then Select Clone
 
-
-<H1> How to use git in android studio </H1>
-
+How to use git in android studio
+-----------------------------------------------------------------------------
 Before you start coding each day make sure you pull -> origin / sprint#
 
 After you are finished coding for the day go to
