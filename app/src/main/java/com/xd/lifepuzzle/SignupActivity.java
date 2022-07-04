@@ -18,6 +18,7 @@ public class SignupActivity extends AppCompatActivity {
         // do something when "male" is called
         view.setEnabled(false);
         Button b = (Button) view;
+        //
         String s = getString(R.string.male);
         b.setText(s);
     }
