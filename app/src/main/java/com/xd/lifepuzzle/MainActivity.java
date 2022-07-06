@@ -8,16 +8,30 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-// MAIN ACTIVITY IS THE PAGE WITH LOGIN AND SIGN UP
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        // ADD UTILS FOR PERMISSIONS
-
+        setContentView(R.layout.activity_first_installation_page);
     }
+
+    /**
+     * Description: opens login activity
+     */
+    public void onLoginClicked(View view){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Description: opens signup activity
+     */
+    public void onSignupClicked(View view){
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
+    }
+
+    /* Easily debug all pages in activity_main layout
 
     public void firstInstallButtonClicked(View view){
         Intent intent = new Intent(this, FirstInstallActivity.class);
@@ -64,7 +78,20 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
+     */
 
 }
+
+
+
+/*
+    References
+
+    LoginActivity: Grid view how to make custom grid view
+    https://www.youtube.com/watch?v=aRgSrJO40z8
+
+    LoginActivity: How to get intent working in onClickListener (getApplicationContext())
+    https://stackoverflow.com/questions/18339681/add-intent-to-onitemclicklistener
+
+
+ */

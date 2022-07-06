@@ -2,4 +2,21 @@
     <string name="app_name">LifePuzzle</string>
     <string name="login">LOGIN</string>
     <string name="signup">SIGNUP</string>
+    <string name="login_select_your_profile">SELECT YOUR PROFILE</string>
+
+    <string name="LifePuzzle">new_App</string>
+    <string name="edit_name">Name</string>
+    <string name="edit_email">Email</string>
+    <string name="edit_phone_number">Phone Number</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="edit_dementia_stage">Stage Of Dementia</string>
+    <string name="button_signUp">Create Account</string>
+    <string name="gender">Gender</string>
+    <string name="name_hint">John Smith</string>
+    <string name="email_hint">johnsmith78@email.com</string>
+    <string name="phone_number_hint">###-###-####</string>
+    <string name="stage_hint">2</string>
+    <string name="page_title">SIGN UP</string>
+    <string name="chosen_button">Selected</string>
 </resources>

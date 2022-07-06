@@ -26,31 +26,40 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:label="Log In"/>
         <activity
             android:name=".Login2Activity"
-            android:exported="false"/>
+            android:exported="false"
+            android:label="Log In"/>
         <activity
             android:name=".FirstInstallActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:label="First Install"/>
         <activity
             android:name=".SignupActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:label="Sign Up"/>
         <activity
             android:name=".MainMenuActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:label="Main Menu"/>
         <activity
             android:name=".PuzzleActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:label="Puzzle"/>
         <activity
             android:name=".SettingsActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:label="Settings"/>
         <activity
             android:name=".CaregiverActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:label="Caregiver Mode"/>
         <activity
             android:name=".MemoryActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:label="Memory"/>
     </application>
 
 </manifest>
