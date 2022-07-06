@@ -15,6 +15,7 @@ public class FirstInstallActivity extends AppCompatActivity {
     }
     /**
      * Description: opens login activity
+     *
      */
     public void onLoginClicked(View view){
         Intent intent = new Intent(this, LoginActivity.class);
