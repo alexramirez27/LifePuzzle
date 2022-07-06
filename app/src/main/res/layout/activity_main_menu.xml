@@ -18,8 +18,8 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView21" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="379dp"
-        android:layout_height="420dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,15 +38,17 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/imageView28"
                     android:layout_width="170dp"
                     android:layout_height="195dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     android:onClick="launchPuzzle"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView30"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/randompuzzle_icon" />
@@ -59,6 +61,8 @@
                     android:layout_marginEnd="8dp"
                     android:onClick="launchPuzzle"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imageView28"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/avatar_test" />
 
@@ -69,6 +73,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:onClick="launchPuzzle"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView33"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView28"
                     app:srcCompat="@drawable/avatar_test" />
@@ -81,6 +87,8 @@
                     android:layout_marginEnd="8dp"
                     android:onClick="launchPuzzle"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imageView32"
                     app:layout_constraintTop_toBottomOf="@+id/imageView30"
                     app:srcCompat="@drawable/avatar_test" />
 
@@ -91,6 +99,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:onClick="launchPuzzle"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView35"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView32"
                     app:srcCompat="@drawable/avatar_test" />
@@ -103,6 +113,8 @@
                     android:layout_marginEnd="8dp"
                     android:onClick="launchPuzzle"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imageView34"
                     app:layout_constraintTop_toBottomOf="@+id/imageView33"
                     app:srcCompat="@drawable/avatar_test" />
 
