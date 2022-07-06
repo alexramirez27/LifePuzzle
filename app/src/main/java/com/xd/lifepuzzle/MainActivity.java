@@ -68,3 +68,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
+/*
+    References
+
+    LoginActivity: Grid view how to make custom grid view
+    https://www.youtube.com/watch?v=aRgSrJO40z8
+
+    LoginActivity: How to get intent working in onClickListener (getApplicationContext())
+    https://stackoverflow.com/questions/18339681/add-intent-to-onitemclicklistener
+
+
+ */
