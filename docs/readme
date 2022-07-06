@@ -1,0 +1,34 @@
+STYLE GUIDE
+
+Naming Guidelines
+---------------------------------------------------------
+imports: should be in alphabetical order
+Classes: should be in PascalCase
+Methods: should be in camelCase
+variables: should be in camelCase
+global variables: should be preceeded with 2 underscores and then use camelCase __variableName
+constant variables: should use UPPERCASE with words seperated by underscores
+
+Formatting Guidelines
+---------------------------------------------------------
+xml UI text: any text visible to the user should be called in the string xml file
+           : strings folder in res -> values -> strings.xml
+           : strings are defined as <string name="textName">visible text</string>
+           : strings are called in xml as android:text="@string/textName"
+
+methods should have 1 line of white space inbetween them
+line length should be 100 characters or less
+most code called onCreate should be in methods
+Methods should try to do 1 thing and be well documented
+
+Documentation Guidelines
+---------------------------------------------------------
+Every method and class should have proper Documentation having a
+description: what the class / method does
+pre-condition: preconditions to using this class / method
+post-condition: post-conditions to this class, do any variables change?
+
+Commenting Guidelines
+---------------------------------------------------------
+Comments should be used sparingly
+instead break your code into methods with a verb in its name (example: onSignUpButtonClicked)
