@@ -18,4 +18,5 @@
     <string name="phone_number_hint">###-###-####</string>
     <string name="stage_hint">2</string>
     <string name="page_title">SIGN UP</string>
+    <string name="chosen_button">Selected</string>
 </resources>
