@@ -13,16 +13,26 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
     }
+
+    /**
+     * Description: opens settings activity
+     */
     public void launchSettings(View v){
         Intent i = new Intent(this, SettingsActivity.class);
         startActivity(i);
     }
 
+    /**
+     * Description: opens caregiver activity
+     */
     public void launchCaregiver(View v){
         Intent i = new Intent(this, CaregiverActivity.class);
         startActivity(i);
     }
 
+    /**
+     * Description: opens puzzle activity
+     */
     public void launchPuzzle(View v){
         Intent i = new Intent(this, PuzzleActivity.class);
         i.putExtra("puzzleID", "Stacey");
