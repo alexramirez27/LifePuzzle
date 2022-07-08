@@ -29,10 +29,6 @@
             android:exported="false"
             android:label="Log In"/>
         <activity
-            android:name=".Login2Activity"
-            android:exported="false"
-            android:label="Log In"/>
-        <activity
             android:name=".FirstInstallActivity"
             android:exported="false"
             android:label="First Install"/>
@@ -40,6 +36,14 @@
             android:name=".SignupActivity"
             android:exported="false"
             android:label="Sign Up"/>
+        <activity
+            android:name=".AddMemberActivity"
+            android:exported="false"
+            android:label="Add Member"/>
+        <activity
+            android:name=".EditMemberActivity"
+            android:exported="false"
+            android:label="Edit Member"/>
         <activity
             android:name=".MainMenuActivity"
             android:exported="false"

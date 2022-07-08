@@ -3,6 +3,7 @@
     <string name="login">LOGIN</string>
     <string name="signup">SIGNUP</string>
     <string name="login_select_your_profile">SELECT YOUR PROFILE</string>
+    <string name="edit_member_select_your_member">SELECT A MEMBER TO EDIT</string>
 
     <string name="LifePuzzle">new_App</string>
     <string name="edit_name">Name</string>

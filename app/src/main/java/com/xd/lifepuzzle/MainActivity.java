@@ -12,26 +12,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first_installation_page);
+        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_first_installation_page);
     }
+//
+//    /**
+//     * Description: opens login activity
+//     */
+//    public void onLoginClicked(View view){
+//        Intent intent = new Intent(this, LoginActivity.class);
+//        startActivity(intent);
+//    }
+//
+//    /**
+//     * Description: opens signup activity
+//     */
+//    public void onSignupClicked(View view){
+//        Intent intent = new Intent(this, SignupActivity.class);
+//        startActivity(intent);
+//    }
 
-    /**
-     * Description: opens login activity
-     */
-    public void onLoginClicked(View view){
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * Description: opens signup activity
-     */
-    public void onSignupClicked(View view){
-        Intent intent = new Intent(this, SignupActivity.class);
-        startActivity(intent);
-    }
-
-    /* Easily debug all pages in activity_main layout
+//     Easily debug all pages in activity_main layout
 
     public void firstInstallButtonClicked(View view){
         Intent intent = new Intent(this, FirstInstallActivity.class);
@@ -43,10 +44,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void loginButtonClicked2(View view){
-        Intent intent = new Intent(this, Login2Activity.class);
+    public void addMemberButtonClicked(View view){
+        Intent intent = new Intent(this, AddMemberActivity.class);
         startActivity(intent);
     }
+
+    public void editMemberButtonClicked(View view){
+        Intent intent = new Intent(this, EditMemberActivity.class);
+        startActivity(intent);
+    }
+
 
     public void signupButtonClicked(View view){
         Intent intent = new Intent(this, SignupActivity.class);
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-     */
+
 
 }
 
