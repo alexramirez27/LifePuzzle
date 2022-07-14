@@ -66,12 +66,13 @@ public class CaregiverActivity extends AppCompatActivity {
     }
 
     /**
-     * Description: opens settings activity
+     * Description: opens add member activity
+     * currently I do not have AddMember.java yet, so I will implement this feature later
      */
-    public void launchAddMember(View v){
-        Intent i = new Intent(this, SettingsActivity.class);
-        startActivity(i);
-    }
+//    public void launchAddMember(View v){
+//        Intent i = new Intent(this, AddMemberActivity.class);
+//        startActivity(i);
+//    }
 
 
 
