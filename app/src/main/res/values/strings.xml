@@ -4,6 +4,14 @@
     <string name="signup">SIGNUP</string>
     <string name="login_select_your_profile">SELECT YOUR PROFILE</string>
     <string name="edit_member_select_your_member">SELECT A MEMBER TO EDIT</string>
+    <string name="member_name">Name</string>
+    <string name="member_relation">Relationship</string>
+    <string name="member_audio">Add Audio Message</string>
+    <string name="member_video">Add Video Message</string>
+    <string name="member_save">SAVE MEMBER</string>
+    <string name="member_delete">DELETE MEMBER</string>
+    <string name="member_edit_name">Member\'s Name</string>
+    <string name="member_edit_relation">Relationship to User</string>
 
     <string name="LifePuzzle">new_App</string>
     <string name="edit_name">Name</string>
