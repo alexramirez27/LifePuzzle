@@ -7,12 +7,14 @@
 
 
     <TextView
+
         android:id="@+id/member_name_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:text="@string/member_name"
         android:textSize="24sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/member_photo"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +34,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.088" />
 
+
     <EditText
         android:id="@+id/member_name"
         android:layout_width="0dp"
@@ -40,11 +43,9 @@
         android:hint="@string/member_edit_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/member_photo"
-        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/member_name_text"
-        app:layout_constraintVertical_bias="0.027" />
-
+        app:layout_constraintVertical_bias="0.011" />
 
     <TextView
         android:id="@+id/member_relation_text"
@@ -53,11 +54,13 @@
         android:layout_marginHorizontal="30dp"
         android:text="@string/member_relation"
         android:textSize="24sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/member_name"
         app:layout_constraintVertical_bias="0.058" />
+
 
     <EditText
         android:id="@+id/member_name2"
@@ -67,11 +70,9 @@
         android:hint="@string/member_edit_relation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.266"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/member_relation_text"
-        app:layout_constraintVertical_bias="0.046" />
-
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/member_audio_text"
@@ -80,6 +81,7 @@
         android:layout_marginHorizontal="30dp"
         android:text="@string/member_audio"
         android:textSize="24sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -92,7 +94,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:onClick="onAddAudioMessageClicked"
-        android:src="@drawable/avatar_test"
+        android:src="@drawable/audio"
         android:layout_marginLeft="270dp"
         app:layout_constraintBottom_toBottomOf="@+id/member_audio_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,6 +109,7 @@
         android:layout_marginHorizontal="30dp"
         android:text="@string/member_video"
         android:textSize="24sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/member_audio"
         app:layout_constraintHorizontal_bias="1.0"
@@ -120,7 +123,7 @@
         android:layout_height="80dp"
         android:onClick="onAddVideoClicked"
         android:layout_marginLeft="270dp"
-        android:src="@drawable/avatar_test"
+        android:src="@drawable/video"
         app:layout_constraintBottom_toBottomOf="@+id/member_video_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -128,33 +131,42 @@
         app:layout_constraintTop_toTopOf="@+id/member_video_text" />
 
 
-    <Button
-        android:id="@+id/member_save_button"
-        android:onClick="onSaveMemberClicked"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/member_save"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/member_video_text"
-        app:layout_constraintVertical_bias="0.695" />
+        app:layout_constraintVertical_bias="0.63">
 
-    <Button
-        android:id="@+id/member_delete_button"
-        android:onClick="onDeleteMemberClicked"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/member_delete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.868"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/member_video_text"
-        app:layout_constraintVertical_bias="0.695" />
+        <Button
+            android:layout_weight="50"
+            android:id="@+id/member_save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:backgroundTint="@color/light_blue"
+            android:onClick="onSaveMemberClicked"
+            android:text="@string/member_save"
+            android:textSize="16sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"/>
 
+        <Button
+            android:layout_weight="50"
+            android:id="@+id/member_delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:backgroundTint="@color/dark_blue"
+            android:onClick="onDeleteMemberClicked"
+            android:text="@string/member_delete"
+            android:textSize="16sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"/>
 
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
