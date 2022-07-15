@@ -151,6 +151,7 @@
             android:onClick="onSaveMemberClicked"
             android:text="@string/member_save"
             android:textSize="16sp"
+            android:textColor="@color/black"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"/>
 
@@ -163,6 +164,7 @@
             android:onClick="onDeleteMemberClicked"
             android:text="@string/member_delete"
             android:textSize="16sp"
+            android:textColor="@color/black"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="10dp"/>
 
