@@ -29,5 +29,7 @@ public class FirstInstallActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
     }
+
+
 }
 

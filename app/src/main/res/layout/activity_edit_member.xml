@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="@string/login_select_your_profile"
+        android:text="@string/edit_member_select_your_member"
         android:textSize="24sp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <GridView
-        android:id="@+id/loginGridView"
+        android:id="@+id/editMemberGridView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:numColumns="auto_fit"
