@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void puzzleButtonClicked(View view){
-        Intent intent = new Intent(this, PuzzleActivity.class);
+        Intent intent = new Intent(this, SelectGameActivity.class);
         startActivity(intent);
     }
 

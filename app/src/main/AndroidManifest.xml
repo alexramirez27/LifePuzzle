@@ -49,6 +49,10 @@
             android:exported="false"
             android:label="Main Menu"/>
         <activity
+            android:name=".SelectGameActivity"
+            android:exported="false"
+            android:label="Select"/>
+        <activity
             android:name=".PuzzleActivity"
             android:exported="false"
             android:label="Puzzle"/>
