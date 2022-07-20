@@ -64,6 +64,11 @@
             android:name=".MemoryActivity"
             android:exported="false"
             android:label="Memory"/>
+        <activity
+            android:name=".AfterBeatingGameVideoActivity"
+            android:exported="false"
+            android:label="You've Completed the Puzzle!"/>
+
     </application>
 
 </manifest>
