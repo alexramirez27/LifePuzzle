@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+/**
+ * Description: opening page of our app which is now in MainActivity
+ *              This class is now used for debugging purposes
+ *
+ */
 public class FirstInstallActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

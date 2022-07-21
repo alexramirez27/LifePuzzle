@@ -33,29 +33,34 @@ import java.util.ArrayList;
 
 import static java.lang.Math.abs;
 
+/**
+ * Description: First Page of our app which allows the user to login or sign up to our app
+ */
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_first_installation_page);
     }
-//
-//    /**
-//     * Description: opens login activity
-//     */
-//    public void onLoginClicked(View view){
-//        Intent intent = new Intent(this, LoginActivity.class);
-//        startActivity(intent);
-//    }
-//
-//    /**
-//     * Description: opens signup activity
-//     */
-//    public void onSignupClicked(View view){
-//        Intent intent = new Intent(this, SignupActivity.class);
-//        startActivity(intent);
-//    }
 
+    /**
+     * Description: opens login page where a user can be selected from our database
+     */
+    public void onLoginClicked(View view){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Description: opens signup page where a user can be created and saved to our database
+     * Post-Condition: database may be updates with a new user
+     */
+    public void onSignupClicked(View view){
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
+    }
+
+    /*
 //     Easily debug all pages in activity_main layout
     public void firstInstallButtonClicked(View view){
         Intent intent = new Intent(this, FirstInstallActivity.class);
@@ -117,10 +122,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AfterBeatingGameVideoActivity.class);
         startActivity(intent);
     }
-
-
+    */
 }
-
 
 
 /*

@@ -164,7 +164,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="50"
-                android:backgroundTint="@color/dark_blue"
+                android:backgroundTint="@color/gray"
                 android:onClick="sendFemale"
                 android:text="@string/female"
                 android:textColor="@color/black"
