@@ -28,4 +28,20 @@
     <string name="stage_hint">2</string>
     <string name="page_title">SIGN UP</string>
     <string name="chosen_button">Selected</string>
+    <string name="age">Age</string>
+    <string name="your_age">Your Age</string>
+    <string name="password">Password</string>
+    <string name="your_password">Your Password</string>
+    <string name="change">Change</string>
+
+    <!-- Spinner Entries -->
+    <string-array name="stages">
+        <item>Stage 1</item>
+        <item>Stage 2</item>
+        <item>Stage 3</item>
+        <item>Stage 4</item>
+        <item>Stage 5</item>
+        <item>Stage 6</item>
+        <item>Stage 7</item>
+    </string-array>
 </resources>

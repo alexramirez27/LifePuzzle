@@ -1,244 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:backgroundTint="@color/light_blue"
-    tools:context=".SignupActivity">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".MainActivity"
+        android:gravity="center">
 
-        <ImageView
-            android:id="@+id/photo"
-            android:layout_width="96dp"
-            android:layout_height="95dp"
-            android:onClick="selectPhoto"
-            android:src="@drawable/avatar_test"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.949"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.031"
-            tools:ignore="SpeakableTextPresentCheck" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
 
+            <!-- Profile Picture -->
+            <ImageView
+                android:id="@+id/profilePicture"
+                android:layout_width="96dp"
+                android:layout_height="95dp"
+                android:layout_marginStart="89dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="2dp"
+                android:src="@drawable/avatar_test"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/changeButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </ImageView>
+
+            <Button
+                android:id="@+id/changeButton"
+                android:layout_width="116dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="79dp"
+                android:layout_marginBottom="22dp"
+                android:text="@string/change"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/profilePicture"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- TextView: Name -->
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="160dp"
             android:text="@string/edit_name"
-            android:textColor="@color/black"
             android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/photo"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/edit_email"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/name_TextField"
-            app:layout_constraintTop_toBottomOf="@+id/name_TextField" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/edit_phone_number"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/email_TextField"
-            app:layout_constraintTop_toBottomOf="@+id/email_TextField" />
-
-
+        <!-- EditText: Your Name -->
         <EditText
-            android:id="@+id/name_TextField"
+            android:id="@+id/yourName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="160dp"
             android:ems="10"
             android:hint="@string/name_hint"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
             android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/photo"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
-        <EditText
-            android:id="@+id/email_TextField"
+        <!-- TextView: Age -->
+        <TextView
+            android:id="@+id/age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:text="@string/age"
+            android:textSize="24sp" />
+
+        <!-- EditText: Your Age -->
+        <EditText
+            android:id="@+id/yourAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/your_age"
+            android:textSize="20sp" />
+
+        <!-- TextView: Email -->
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_email"
+            android:textSize="24sp" />
+
+        <!-- EditText: Your Email -->
+        <EditText
+            android:id="@+id/yourEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/email_hint"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
             tools:ignore="TextContrastCheck" />
 
-        <EditText
-            android:id="@+id/editTextPhone2"
+        <!-- TextView: Phone Number -->
+        <TextView
+            android:id="@+id/phoneNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:text="@string/edit_phone_number"
+            android:textSize="24sp" />
+
+        <!-- EditText: Your Phone Number -->
+        <EditText
+            android:id="@+id/yourPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/phone_number_hint"
             android:importantForAutofill="no"
             android:inputType="phone"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView7"
-            app:layout_constraintTop_toBottomOf="@+id/textView7"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck" />
 
+        <!-- TextView: Phone Number -->
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/gender"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextPhone2"
-            app:layout_constraintStart_toStartOf="@+id/editTextPhone2"
-            app:layout_constraintTop_toBottomOf="@+id/editTextPhone2" />
+            android:text="@string/password"
+            android:textSize="24sp" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_marginBottom="212dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/editTextPhone2"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextPhone2"
-            app:layout_constraintTop_toBottomOf="@+id/textView10"
-            app:layout_constraintVertical_bias="0.0">
-
-            <Button
-                android:id="@+id/button1"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="177dp"
-                android:layout_height="80dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="50"
-                android:backgroundTint="@color/light_blue"
-                android:onClick="sendMale"
-                android:text="@string/male"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="177dp"
-                android:layout_height="80dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="50"
-                android:backgroundTint="@color/gray"
-                android:onClick="sendFemale"
-                android:text="@string/female"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="160dp"
-            android:text="Stage Of Dementia "
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView6"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-            app:layout_constraintVertical_bias="0.0" />
-
+        <!-- EditText: Your Phone Number -->
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/yourPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/your_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textSize="20sp"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck" />
+
+        <!-- TextView: Gender -->
+        <TextView
+            android:id="@+id/gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gender"
+            android:textSize="24sp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="283dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- RadioButton: Male -->
+
+            <!-- RadioButton: Female -->
+            <RadioButton
+                android:id="@+id/radioGenderM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:buttonTint="@color/dark_blue"
+                android:text="@string/male"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="195dp"
+                tools:layout_editor_absoluteY="370dp" />
+
+            <RadioButton
+                android:id="@+id/radioGenderF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="@color/dark_blue"
+                android:text="@string/female"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="62dp"
+                tools:layout_editor_absoluteY="369dp" />
+
+        </RadioGroup>
+
+        <!-- Spinner: Stages -->
+        <TextView
+            android:id="@+id/stage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_dementia_stage"
+            android:textSize="24sp" />
+
+        <Spinner
+            android:id="@+id/spinnerStages"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="160dp"
-            android:layout_marginBottom="41dp"
-            android:ems="10"
-            android:hint="@string/stage_hint"
-            android:inputType="textPersonName"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/button"
-            app:layout_constraintEnd_toStartOf="@+id/imageView6"
-            app:layout_constraintHorizontal_bias="0.1"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-            app:layout_constraintTop_toBottomOf="@+id/textView11"
-            app:layout_constraintVertical_bias="0.906"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:entries="@array/stages"
+            android:focusable="false"
+            tools:layout_editor_absoluteY="502dp">
+        </Spinner>
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="128dp"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/light_blue"
-            android:onClick="sign_user_up"
-            android:text="@string/signup"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-            app:layout_constraintVertical_bias="1.0" />
+            android:id="@+id/signUpBtn"
+            android:layout_width="281dp"
+            android:layout_height="54dp"
+            android:text="@string/page_title"
+            android:textSize="20sp" />
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="96dp"
-            android:layout_height="95dp"
-            android:onClick="stageFinder"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.949"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.774"
-            app:srcCompat="@drawable/medical_avatar"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </ScrollView>
+
