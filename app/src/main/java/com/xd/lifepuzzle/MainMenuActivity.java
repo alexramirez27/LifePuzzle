@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+/**
+ * Description: puzzle selection page where the user can select a member that they want to
+ *              pick a puzzle from (choose a puzzle of my pet simba from
+ *              his 5 photos on the next page
+ */
 public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +19,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     /**
-     * Description: opens settings activity
+     * Description: opens settings page
      */
     public void launchSettings(View v){
         Intent i = new Intent(this, SettingsActivity.class);
@@ -23,7 +27,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     /**
-     * Description: opens caregiver activity
+     * Description: opens caregiver page
      */
     public void launchCaregiver(View v){
         Intent i = new Intent(this, CaregiverActivity.class);
@@ -31,7 +35,8 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     /**
-     * Description: opens puzzle activity
+     * Description: opens puzzle selection page passing in the member
+     *              so that puzzles from the member can be shown
      */
     public void launchPuzzle(View v){
         Intent i = new Intent(this, PuzzleActivity.class);

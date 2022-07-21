@@ -4,17 +4,20 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
-
 import java.util.ArrayList;
 
+
+/**
+ * Description: allows the caregiver to see data about the time it takes the user to complete
+ *              each puzzle they do
+ * Post-condition: new user added to our database
+ */
 public class CaregiverActivity extends AppCompatActivity {
 
     ArrayList barArrayList;
@@ -28,9 +31,8 @@ public class CaregiverActivity extends AppCompatActivity {
     }
 
     /**
-     * Description: Creates Bar Chart
+     * Description: Creates Bar Chart of the time it takes the user to complete the puzzle
      */
-
     private void createBarChart(){
 
         BarChart barChart = findViewById(R.id.barchart);

@@ -7,7 +7,10 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+/**
+ * Description: Allows the user to select a user to login to from our database
+ * Post-condition: database accessed to retrieve user
+ */
 public class LoginActivity extends AppCompatActivity {
 
     public static String CURRENT_USER_KEY = "current user";
