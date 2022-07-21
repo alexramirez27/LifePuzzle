@@ -46,6 +46,8 @@
         app:layout_constraintVertical_bias="0.056" />
 
 
+
+
     <Button
         android:id="@+id/signup_button"
         android:layout_width="wrap_content"
@@ -69,10 +71,10 @@
         android:text="EDIT MEMBER"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_button3"
-        app:layout_constraintVertical_bias="0.297" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_button4"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/signup_button3"
@@ -87,6 +89,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button"
         app:layout_constraintVertical_bias="0.159" />
+
+    <Button
+        android:id="@+id/signup_button10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="312dp"
+        android:onClick="selectMemoryButtonClicked"
+        android:text="Select MEMORY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_button3"
+        app:layout_constraintVertical_bias="0.285" />
 
     <Button
         android:id="@+id/button3"
@@ -151,23 +167,5 @@
         app:layout_constraintTop_toBottomOf="@+id/button6"
         app:layout_constraintVertical_bias="0.469" />
 
-    <GridView
-        android:id="@+id/grid"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:horizontalSpacing="10dp"
-        android:numColumns="3"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="10dp"
-        android:verticalSpacing="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent"  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
