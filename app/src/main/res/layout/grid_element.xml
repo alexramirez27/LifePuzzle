@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="2dp"
-    android:background="@color/design_default_color_primary"
-    >
+    android:background="@drawable/puzzle_frame">
 
     <ImageView
         android:id="@+id/gridImageview"
