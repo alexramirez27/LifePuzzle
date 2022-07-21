@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.xd.lifepuzzle">
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!--    TODO ADD UTIL PERMISSIONS FOR START OF APP-->
 
     <application
@@ -48,6 +48,10 @@
             android:name=".MainMenuActivity"
             android:exported="false"
             android:label="Main Menu"/>
+        <activity
+            android:name=".SelectGameActivity"
+            android:exported="false"
+            android:label="Select"/>
         <activity
             android:name=".PuzzleActivity"
             android:exported="false"
