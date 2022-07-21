@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.xd.lifepuzzle">
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!--    TODO ADD UTIL PERMISSIONS FOR START OF APP-->
 
     <application
@@ -49,6 +49,10 @@
             android:exported="false"
             android:label="Main Menu"/>
         <activity
+            android:name=".SelectGameActivity"
+            android:exported="false"
+            android:label="Select Game Activity"/>
+        <activity
             android:name=".PuzzleActivity"
             android:exported="false"
             android:label="Puzzle"/>
@@ -64,6 +68,11 @@
             android:name=".MemoryActivity"
             android:exported="false"
             android:label="Memory"/>
+        <activity
+            android:name=".AfterBeatingGameVideoActivity"
+            android:exported="false"
+            android:label="You've Completed the Puzzle!"/>
+
     </application>
 
 </manifest>

@@ -8,12 +8,36 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import static java.lang.Math.abs;
+
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        setContentView(R.layout.activity_first_installation_page);
     }
 //
 //    /**
@@ -33,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 //     Easily debug all pages in activity_main layout
-
     public void firstInstallButtonClicked(View view){
         Intent intent = new Intent(this, FirstInstallActivity.class);
         startActivity(intent);
@@ -66,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void puzzleButtonClicked(View view){
-        Intent intent = new Intent(this, PuzzleActivity.class);
+        Intent intent = new Intent(this, SelectGameActivity.class);
         startActivity(intent);
     }
 
@@ -85,6 +108,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void selectMemoryButtonClicked(View view){
+        Intent intent = new Intent(this, SelectGameActivity.class);
+        startActivity(intent);
+    }
+
+    public void launchAfterBeatingGame(View view){
+        Intent intent = new Intent(this, AfterBeatingGameVideoActivity.class);
+        startActivity(intent);
+    }
 
 
 }

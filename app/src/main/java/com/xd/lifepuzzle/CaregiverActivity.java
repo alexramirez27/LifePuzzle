@@ -44,8 +44,8 @@ public class CaregiverActivity extends AppCompatActivity {
         //text color
         barDataSet.setValueTextColor(Color.BLACK);
         //setting text size
-        barDataSet.setValueTextSize(16f);
-        barChart.getDescription().setEnabled(true);
+        barDataSet.setValueTextSize(20f);
+        //barChart.getDescription().setEnabled(true);
 
     }
 
@@ -56,24 +56,31 @@ public class CaregiverActivity extends AppCompatActivity {
     private void getData()
     {
         barArrayList = new ArrayList();
-        barArrayList.add(new BarEntry(2f,10));
-        barArrayList.add(new BarEntry(3f,20));
-        barArrayList.add(new BarEntry(4f,30));
-        barArrayList.add(new BarEntry(5f,40));
-        barArrayList.add(new BarEntry(6f,50));
-        barArrayList.add(new BarEntry(7f,60));
+        barArrayList.add(new BarEntry(1,10));
+        barArrayList.add(new BarEntry(2,20));
+        barArrayList.add(new BarEntry(3,30));
+        barArrayList.add(new BarEntry(4,40));
+        barArrayList.add(new BarEntry(5,50));
+        barArrayList.add(new BarEntry(6,60));
 
     }
 
     /**
      * Description: opens add member activity
-     * currently I do not have AddMember.java yet, so I will implement this feature later
      */
-//    public void launchAddMember(View v){
-//        Intent i = new Intent(this, AddMemberActivity.class);
-//        startActivity(i);
-//    }
+    public void launchAddMember(View v){
+        Intent i = new Intent(this, AddMemberActivity.class);
+        startActivity(i);
+    }
 
+    /**
+     * Description: opens edit member activity
+     */
+
+    public void launchEditMember(View v){
+        Intent i = new Intent(this, EditMemberActivity.class);
+        startActivity(i);
+    }
 
 
 }
