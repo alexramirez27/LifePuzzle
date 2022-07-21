@@ -68,15 +68,11 @@
             android:name=".MemoryActivity"
             android:exported="false"
             android:label="Memory"/>
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
+        <activity
+            android:name=".AfterBeatingGameVideoActivity"
             android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
-        </provider>
+            android:label="You've Completed the Puzzle!"/>
+
     </application>
 
 </manifest>
