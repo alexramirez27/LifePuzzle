@@ -16,13 +16,13 @@
         android:textSize="24sp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/member_photo"
+        app:layout_constraintEnd_toStartOf="@+id/photo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.08" />
 
     <ImageView
-        android:id="@+id/member_photo"
+        android:id="@+id/photo"
         android:onClick="onAddMemberPhotoClicked"
         android:layout_width="96dp"
         android:layout_height="95dp"
@@ -42,7 +42,7 @@
         android:layout_marginHorizontal="30dp"
         android:hint="@string/member_edit_name"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/member_photo"
+        app:layout_constraintEnd_toStartOf="@+id/photo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/member_name_text"
         app:layout_constraintVertical_bias="0.011" />
@@ -143,30 +143,30 @@
         app:layout_constraintVertical_bias="0.63">
 
         <Button
-            android:layout_weight="50"
             android:id="@+id/member_save_button"
             android:layout_width="wrap_content"
             android:layout_height="80dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="50"
             android:backgroundTint="@color/light_blue"
             android:onClick="onSaveMemberClicked"
             android:text="@string/member_save"
-            android:textSize="16sp"
             android:textColor="@color/black"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"/>
+            android:textSize="16sp" />
 
         <Button
-            android:layout_weight="50"
             android:id="@+id/member_delete_button"
             android:layout_width="wrap_content"
             android:layout_height="80dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="50"
             android:backgroundTint="@color/dark_blue"
             android:onClick="onDeleteMemberClicked"
             android:text="@string/member_delete"
-            android:textSize="16sp"
             android:textColor="@color/black"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="10dp"/>
+            android:textSize="16sp" />
 
     </LinearLayout>
 

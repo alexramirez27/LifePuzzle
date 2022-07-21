@@ -1,38 +1,71 @@
 package com.xd.lifepuzzle;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SignupActivity extends AppCompatActivity {
+    private Button maleButton;
+    private Button femaleButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        maleButton = findViewById(R.id.button1);
+        femaleButton = findViewById(R.id.button4);
     }
-    /**called when the user taps the "male" button*/
-    public void sendMale(View view)
+
+    /**
+     * called when the user taps the "male" button
+     */
+    public void sendMale(View v)
     {
-        // "male" button gets clicked and becomes disabled
-        findViewById(R.id.button).setEnabled((false));
-        ((Button)findViewById(R.id.button)).setText(R.string.chosen_button);
+        // on clicking, button changes to "selected" and turns light blue leaving "FEMALE" button greyed out
+        // on clicking, Alert is send out to display what the user's current choice is
+        maleButton.setBackgroundColor(getResources().getColor(R.color.light_blue));
+        femaleButton.setBackgroundColor(Color.GRAY);
+        Toast.makeText(SignupActivity.this, "Male Selected", Toast.LENGTH_SHORT).show();
     }
     /**called when the user taps the "female" button*/
-    public void sendFemale(View view)
+    public void sendFemale(View v)
     {
-        // "female" button gets clicked and becomes disabled
-        findViewById(R.id.button4).setEnabled(false);
-        ((Button)findViewById(R.id.button4)).setText(R.string.chosen_button);
+        // on clicking, button changes to "selected" and turns light blue leaving "MALE" button greyed out
+        // on clicking, Alert is send out to display what the user's current choice is
+        maleButton.setBackgroundColor(getResources().getColor(R.color.light_blue));
+        femaleButton.setBackgroundColor(Color.GRAY);
+        Toast.makeText(SignupActivity.this, "Female Selected", Toast.LENGTH_SHORT).show();
     }
     /**called when the user taps the "Sign Up" button*/
     public void sign_user_up(View v)
     {
-        // sign user up and open "Main Menu"
-        v.setEnabled(false);
-        Intent i = new Intent(this, MainMenuActivity.class);
-        startActivity(i);
+        // upon clicking, button
+        Intent intent = new Intent(SignupActivity.this, MainMenuActivity.class);
+        startActivity(intent);
+        Toast.makeText(SignupActivity.this, "Redirecting", Toast.LENGTH_SHORT).show();
+    }
+
+    /** Description: opens weblink to medical info page for users/caretakers unsure
+     * of patient's dementia stage before signing up
+     */
+    public void stageFinder(View v)
+    {
+        Intent initateDiagnosis = new Intent(Intent.ACTION_VIEW, Uri.parse("https://alzheimer.ca/en/about-dementia/do-i-have-dementia/how-get-tested-dementia"));
+        startActivity(initateDiagnosis);
+    }
+
+    /**
+     * Description: opens dialog box to take a photo or get one from file explorer
+     */
+    public void selectPhoto(View v) {
+        Toast.makeText(SignupActivity.this, "No photo", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MainMenuActivity.class);
+        startActivity(intent);
     }
 }
