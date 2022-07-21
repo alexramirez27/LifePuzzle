@@ -298,7 +298,9 @@ public class PuzzleActivity extends AppCompatActivity {
 
     public void checkGameOver() {
         if (isGameOver()) {
-            finish();
+            Intent intent = new Intent(this, AfterBeatingGameVideoActivity.class);
+            startActivity(intent);
+//            finish();
         }
     }
 

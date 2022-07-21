@@ -39,7 +39,7 @@ public class MainMenuActivity extends AppCompatActivity {
      *              so that puzzles from the member can be shown
      */
     public void launchPuzzle(View v){
-        Intent i = new Intent(this, PuzzleActivity.class);
+        Intent i = new Intent(this, SelectGameActivity.class);
         i.putExtra("puzzleID", "Stacey");
         startActivity(i);
     }

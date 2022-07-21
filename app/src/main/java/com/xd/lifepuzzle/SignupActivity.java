@@ -1,5 +1,6 @@
 package com.xd.lifepuzzle;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -185,6 +186,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         Toast.makeText(SignupActivity.this, "Failed to sign up! Try again!", Toast.LENGTH_LONG).show();
                     }
                 });
+
+        Intent intent = new Intent(this, MainMenuActivity.class);
+        startActivity(intent);
+
     }
 
 
