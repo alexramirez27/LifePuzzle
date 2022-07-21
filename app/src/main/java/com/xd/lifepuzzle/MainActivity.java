@@ -38,16 +38,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        setContentView(R.layout.activity_first_installation_page);
-        AssetManager am = getAssets();
-        try {
-            final String[] files  = am.list("img");
-
-            GridView grid = findViewById(R.id.grid);
-            grid.setAdapter(new ImageAdapter(this));
-        } catch (IOException e) {
-            Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT);
-        }
     }
 //
 //    /**
@@ -67,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 //     Easily debug all pages in activity_main layout
-
     public void firstInstallButtonClicked(View view){
         Intent intent = new Intent(this, FirstInstallActivity.class);
         startActivity(intent);
@@ -119,7 +108,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    public void selectMemoryButtonClicked(View view){
+        Intent intent = new Intent(this, SelectGameActivity.class);
+        startActivity(intent);
+    }
 
 }
 
