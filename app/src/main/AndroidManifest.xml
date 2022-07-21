@@ -51,7 +51,7 @@
         <activity
             android:name=".SelectGameActivity"
             android:exported="false"
-            android:label="Select"/>
+            android:label="Select Game Activity"/>
         <activity
             android:name=".PuzzleActivity"
             android:exported="false"
