@@ -1,6 +1,7 @@
 package com.xd.lifepuzzle;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -103,6 +104,15 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 //        if (v.getId() == R.id.signUpBtn) {
 //            signUpBtn();
 //        }
+    }
+
+    /** Description: opens weblink to medical info page for users/caretakers unsure
+     * of patient's dementia stage before signing up
+     */
+    public void stageFinder(View v)
+    {
+        Intent initateDiagnosis = new Intent(Intent.ACTION_VIEW, Uri.parse("https://alzheimer.ca/en/about-dementia/do-i-have-dementia/how-get-tested-dementia"));
+        startActivity(initateDiagnosis);
     }
 
     private void signUpBtn(int holder){
