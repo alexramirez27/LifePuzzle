@@ -17,7 +17,10 @@
         tools:targetApi="31" >
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,50 +30,72 @@
         <activity
             android:name=".LoginActivity"
             android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="sensorPortrait"
             android:label="Log In"/>
         <activity
             android:name=".FirstInstallActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:label="First Install"/>
         <activity
             android:name=".SignupActivity"
             android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
             android:label="Sign Up"/>
         <activity
             android:name=".AddMemberActivity"
             android:exported="false"
+            android:parentActivityName=".CaregiverActivity"
+            android:screenOrientation="portrait"
             android:label="Add Member"/>
         <activity
             android:name=".EditMemberActivity"
             android:exported="false"
+            android:parentActivityName=".CaregiverActivity"
+            android:screenOrientation="portrait"
             android:label="Edit Member"/>
         <activity
             android:name=".MainMenuActivity"
             android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
             android:label="Main Menu"/>
         <activity
             android:name=".SelectGameActivity"
             android:exported="false"
+            android:parentActivityName=".MainMenuActivity"
+            android:screenOrientation="portrait"
             android:label="Select Game Activity"/>
         <activity
             android:name=".PuzzleActivity"
             android:exported="false"
-            android:label="Puzzle"/>
+            android:parentActivityName=".SelectGameActivity"
+            android:screenOrientation="portrait"
+            android:label="Puzzle" />
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
+            android:parentActivityName=".MainMenuActivity"
+            android:screenOrientation="portrait"
             android:label="Settings"/>
         <activity
             android:name=".CaregiverActivity"
             android:exported="false"
+            android:parentActivityName=".MainMenuActivity"
+            android:screenOrientation="portrait"
             android:label="Caregiver Mode"/>
         <activity
             android:name=".MemoryActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:label="Memory"/>
         <activity
             android:name=".AfterBeatingGameVideoActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".SelectGameActivity"
             android:label="You've Completed the Puzzle!"/>
 
     </application>

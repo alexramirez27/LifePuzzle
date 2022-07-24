@@ -3,6 +3,8 @@ package com.xd.lifepuzzle;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,6 +51,35 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        // Enable "up" on toolbar
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
+        //show "Hide password" feature using eye icon
+        ImageView showHidePassword = findViewById(R.id.show_hide_password);
+        showHidePassword.setImageResource(R.drawable.ic_hide_pwd);
+        showHidePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (editTextPassword.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance()))
+                {
+                    // if password is visible then hide it
+                    editTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    // icon is changed
+                    showHidePassword.setImageResource(R.drawable.ic_hide_pwd);
+                }
+                else
+                {
+                    // if password is hidden then display it
+                    editTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    // icon is changed
+                    showHidePassword.setImageResource(R.drawable.ic_show_pwd);
+                }
+            }
+        });
+
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -201,10 +233,16 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         startActivity(intent);
 
     }
-
-
-
-
+    /** called when the medicalAvatar is clicked */
+    public void assistDiagnosis(View v)
+    {
+        /** opens webpage to AlzheimerSociety(default_location:Canada) to allow caregiver/early-stage
+         * patients learn about the different stages and the procedure for getting diagnosed for
+         * a particular stage
+          */
+        Intent diagnosis = new Intent(Intent.ACTION_VIEW, Uri.parse("https://alzheimer.ca/en/about-dementia/do-i-have-dementia/how-get-tested-dementia"));
+        startActivity(diagnosis);
+    }
 
 
 }

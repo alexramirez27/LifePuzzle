@@ -9,6 +9,7 @@ import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -23,6 +24,9 @@ public class AfterBeatingGameVideoActivity extends AppCompatActivity {
         //if video exists in the database, then playVideo
         setContentView(R.layout.activity_after_beating_game_video);
         playVideo();
+        // Enable "up" on toolbar
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         /*
 
