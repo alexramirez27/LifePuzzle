@@ -17,64 +17,55 @@
             android:layout_width="match_parent"
             android:layout_height="100dp">
 
+            <!-- TextView: Name -->
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_name"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/yourName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/name_hint"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name"
+                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
             <!-- Profile Picture -->
             <ImageView
                 android:id="@+id/profilePicture"
                 android:layout_width="96dp"
                 android:layout_height="95dp"
-                android:layout_marginStart="89dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="2dp"
+                android:onClick="onSignUpProfileChangeClicked"
                 android:src="@drawable/avatar_test"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/changeButton"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/yourName"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+
 
             </ImageView>
 
-            <Button
-                android:id="@+id/changeButton"
-                android:layout_width="116dp"
-                android:layout_height="70dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="89dp"
-                android:layout_marginBottom="22dp"
-                android:backgroundTint="@color/light_blue"
-                android:text="@string/change"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/profilePicture"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.555" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- TextView: Name -->
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/edit_name"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- EditText: Your Name -->
-        <EditText
-            android:id="@+id/yourName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/name_hint"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:textSize="20sp"
-            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <!-- TextView: Age -->
         <TextView
@@ -217,24 +208,22 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
-
             <TextView
                 android:id="@+id/stage"
-                android:layout_width="272dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/edit_dementia_stage"
-                android:textColor="@color/black"
                 android:textSize="24sp" />
 
             <ImageView
-                android:id="@+id/weblinkBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="assistDiagnosis"
-                app:srcCompat="@drawable/medical_avatar"
+                android:id="@+id/imageView6"
+                android:layout_marginLeft="30dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:onClick="stageFinder"
+                app:srcCompat="@drawable/information"
                 tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 
