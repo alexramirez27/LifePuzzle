@@ -19,6 +19,10 @@ import android.net.Uri;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.util.Log;
+import android.view.View;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -36,6 +40,8 @@ public class PuzzleActivity extends AppCompatActivity {
     String mCurrentPhotoPath;
     String mCurrentPhotoUri;
 
+    private Chronometer chronometer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +57,10 @@ public class PuzzleActivity extends AppCompatActivity {
         final String assetName = intent.getStringExtra("assetName");
         mCurrentPhotoPath = intent.getStringExtra("mCurrentPhotoPath");
         mCurrentPhotoUri = intent.getStringExtra("mCurrentPhotoUri");
+
+        chronometer = findViewById(R.id.chronometer);
+        chronometer.setVisibility(View.GONE);
+        chronometer.start();
 
         // run image related code after the view was laid out
         // to have all dimensions calculated
@@ -303,6 +313,10 @@ public class PuzzleActivity extends AppCompatActivity {
 
     public void checkGameOver() {
         if (isGameOver()) {
+            long elapsedMillis = (SystemClock.elapsedRealtime() - chronometer.getBase()) / 1000;
+            Log.d("DEBUG", String.valueOf(elapsedMillis));
+            // send elapsedMillis to database
+
             Intent intent = new Intent(this, AfterBeatingGameVideoActivity.class);
             startActivity(intent);
 //            finish();

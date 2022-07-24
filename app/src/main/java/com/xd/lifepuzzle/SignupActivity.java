@@ -138,6 +138,15 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 //        }
     }
 
+    /** Description: opens weblink to medical info page for users/caretakers unsure
+     * of patient's dementia stage before signing up
+     */
+    public void stageFinder(View v)
+    {
+        Intent initateDiagnosis = new Intent(Intent.ACTION_VIEW, Uri.parse("https://alzheimer.ca/en/about-dementia/do-i-have-dementia/how-get-tested-dementia"));
+        startActivity(initateDiagnosis);
+    }
+
     private void signUpBtn(int holder){
         String fullName = editTextName.getText().toString().trim();
         String age = editTextAge.getText().toString().trim();
