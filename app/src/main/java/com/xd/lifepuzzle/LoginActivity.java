@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
     GridView gridView;
     List<String> names;
+    List<String> uniqueID;
     int[] images;
 
 
@@ -83,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
 //        myRef.child(key).setValue(user);
 
         names = new ArrayList<>();
+        uniqueID = new ArrayList<>();
 
 //        How to query all data from firebase using a for loop.
 //        Should be able to query
@@ -91,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     names.add(ds.child("name").getValue(String.class));
+                    uniqueID.add(ds.child("uniqueID").getValue(String.class));
                     String temp = ds.child("name").getValue(String.class);
                     // gets list of all names
                     Log.v("TAG", temp);
@@ -166,7 +169,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
-                bundle.putString(CURRENT_USER_KEY, names.get(position));
+                bundle.putString(CURRENT_USER_KEY, uniqueID.get(position));
 
                 Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
                 intent.putExtras(bundle);

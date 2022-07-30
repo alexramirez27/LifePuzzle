@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -106,12 +107,20 @@ public class AddMemberActivity extends AppCompatActivity {
 
         // creates new user
         Member member = new Member(name.getText().toString(), relationship.getText().toString(), key);
+//        User user = new User("John Smith", "64", "jsmith@gmail.com", "Male", "123124213", member);
         // sends member to firebase
 
-        // Creates Member which can be references on Main Menu
-        myRef.child(name.getText().toString());
+//         Creates Member which can be references on Main Menu
+//        myRef.child(name.getText().toString());
         // Creates Unique ID per puzzle which can be used on puzzle selection
-        myRef.child(name.getText().toString()).child(key).setValue(member);
+        if (MainMenuActivity.currentUserID != null){
+            Log.v("TAG", MainMenuActivity.currentUserID);
+            myRef.child(MainMenuActivity.currentUserID).child(name.getText().toString()).child(key).setValue(member);
+//            myRef.setValue(MainMenuActivity.currentUserID);
+//            myRef.child(MainMenuActivity.currentUserID).setValue(name.getText().toString());
+//            myRef.child(MainMenuActivity.currentUserID).child(key).setValue(MainMenuActivity.currentUserID);
+
+        }
 
 
         Intent intent = new Intent(this, MainMenuActivity.class);

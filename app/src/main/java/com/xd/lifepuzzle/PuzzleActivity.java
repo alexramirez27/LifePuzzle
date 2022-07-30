@@ -325,14 +325,14 @@ public class PuzzleActivity extends AppCompatActivity {
             Log.d("DEBUG", String.valueOf(elapsedMillis));
             // send elapsedMillis to database
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("Members");
+            DatabaseReference myRef = database.getReference("Members").child(MainMenuActivity.currentUserID);
 
             myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String name = "Michael Fischer";
-                    String relationship = "friend";
-                    String key = "-N8CwINMif-BzfQNfWXo";
+                    String name = "John Smith";
+                    String relationship = "Friend";
+                    String key = "-N8ElKSCa7PdVrwSSok2";
                     // TODO get current completionTime list from database
                     List<Long> completionTime = new ArrayList<>();
                     completionTime.add(elapsedMillis);
@@ -341,7 +341,7 @@ public class PuzzleActivity extends AppCompatActivity {
                     // currentPuzzle data should be passed by intent or be public when selecting puzzle
                     // Creates Member which can be references on Main Menu
                     Member member = new Member(name, relationship, key, completionTime);
-                    myRef.child(name);
+//                    myRef.child(name);
                     // Creates Unique ID per puzzle which can be used on puzzle selection
                     myRef.child(name).child(key).setValue(member);
 

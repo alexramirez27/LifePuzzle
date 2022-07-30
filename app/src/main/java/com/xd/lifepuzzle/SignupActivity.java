@@ -18,6 +18,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
@@ -205,31 +206,47 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         String finalGender = gender;
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
 
-                    if(task.isSuccessful()){
-                        User user = new User(fullName, age, email, phoneNo, finalGender);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Users");
 
-                        FirebaseDatabase.getInstance().getReference("Users")
-                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .setValue(user).addOnCompleteListener(task1 -> {
+//        How to push new user to database
+//        User user = new User("test 5", "18", "bob@gmail.com", "1234567", "Male");
 
-                                    if(task1.isSuccessful()){
-                                        Toast.makeText(SignupActivity.this, "User has been signed up successfully!", Toast.LENGTH_LONG).show();
-                                    }
-                                    else{
-                                        Toast.makeText(SignupActivity.this, "Failed to sign up! Try again!", Toast.LENGTH_LONG).show();
-                                    }
-                                });
+        String key = myRef.push().getKey();
+        User user = new User(fullName, age, email, phoneNo, finalGender, key);
+        myRef.child(key).setValue(user);
 
-                    }
-                    else{
-                        Toast.makeText(SignupActivity.this, "Failed to sign up! Try again!", Toast.LENGTH_LONG).show();
-                    }
-                });
+//        mAuth.createUserWithEmailAndPassword(email, password)
+//                .addOnCompleteListener(task -> {
+//
+//                    if(task.isSuccessful()){
+//                        User user = new User(fullName, age, email, phoneNo, finalGender);
+//
+//                        FirebaseDatabase.getInstance().getReference("Users")
+//                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                                .setValue(user).addOnCompleteListener(task1 -> {
+//
+//                                    if(task1.isSuccessful()){
+//                                        Toast.makeText(SignupActivity.this, "User has been signed up successfully!", Toast.LENGTH_LONG).show();
+//                                    }
+//                                    else{
+//                                        Toast.makeText(SignupActivity.this, "Failed to sign up! Try again!", Toast.LENGTH_LONG).show();
+//                                    }
+//                                });
+//
+//                    }
+//                    else{
+//                        Toast.makeText(SignupActivity.this, "Failed to sign up! Try again!", Toast.LENGTH_LONG).show();
+//                    }
+//                });
+
+        // TODO: get user key
+        Bundle bundle = new Bundle();
+        bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
 
         Intent intent = new Intent(this, MainMenuActivity.class);
+        intent.putExtras(bundle);
         startActivity(intent);
 
     }
