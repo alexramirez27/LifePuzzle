@@ -2,6 +2,7 @@ package com.xd.lifepuzzle;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
@@ -11,7 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
  *              pick a puzzle from (choose a puzzle of my pet simba from
  *              his 5 photos on the next page
  */
+
+
 public class MainMenuActivity extends AppCompatActivity {
+
+    public static String currentUserID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +26,17 @@ public class MainMenuActivity extends AppCompatActivity {
         // Enable "up" on toolbar
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+
+        try{
+            Intent intent = getIntent();
+            currentUserID = intent.getStringExtra(LoginActivity.CURRENT_USER_KEY);
+            Log.v("TAG", currentUserID);
+        } catch (Exception e){
+
+        }
+
+
+
     }
 
     /**
