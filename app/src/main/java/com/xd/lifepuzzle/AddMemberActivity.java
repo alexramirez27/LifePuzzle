@@ -6,15 +6,21 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class AddMemberActivity extends AppCompatActivity {
 //    lateinit var cameraResult : ActivityResultLauncher<Intent>
     public ActivityResultLauncher<Intent> cameraResult;
+    private EditText name;
+    private EditText relationship;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +29,9 @@ public class AddMemberActivity extends AppCompatActivity {
         // Enable "up" on toolbar
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+
+        name = findViewById(R.id.member_name);
+        relationship = findViewById(R.id.member_relationship);
 
 //        Resources res = getResources();
 //        cameraResult = res.getStringArray(R.array.camera_options_list);
@@ -87,7 +96,19 @@ public class AddMemberActivity extends AppCompatActivity {
      * Description: saves member to database and opens main menu
      */
     public void onSaveMemberClicked(View view){
-        Toast.makeText(AddMemberActivity.this, "No onSaveMemberClicked", Toast.LENGTH_SHORT).show();
+        Toast.makeText(AddMemberActivity.this, "onSaveMemberClicked", Toast.LENGTH_SHORT).show();
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Members");
+
+        // creates unique ID
+        String key = myRef.push().getKey();
+
+        // creates new user
+        Member member = new Member(name.getText().toString(), relationship.getText().toString(), key);
+        // sends member to firebase
+        myRef.child(key).setValue(member);
+
         Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);
     }

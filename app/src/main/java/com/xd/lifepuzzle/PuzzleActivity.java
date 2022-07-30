@@ -16,6 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,9 +32,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import static java.lang.Math.abs;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class PuzzleActivity extends AppCompatActivity {
     ArrayList<PuzzlePiece> pieces;
@@ -316,6 +324,40 @@ public class PuzzleActivity extends AppCompatActivity {
             long elapsedMillis = (SystemClock.elapsedRealtime() - chronometer.getBase()) / 1000;
             Log.d("DEBUG", String.valueOf(elapsedMillis));
             // send elapsedMillis to database
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("Members");
+
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    // currentPuzzle data should be passed by intent or be public when selecting puzzle
+                    String name = "michael fischer";
+                    String relationship = "friend";
+                    String key = "-N8Ctc1IR-gGKPvX3B9P";
+                    // TODO get current completionTime list from database
+                    List<Long> completionTime = new ArrayList<>();
+                    completionTime.add(elapsedMillis);
+
+//                    String key = myRef.push().getKey();
+                    Member member = new Member(name, relationship, key, completionTime);
+                    myRef.child(key).setValue(member);
+
+
+//                    for(DataSnapshot ds : snapshot.getChildren()) {
+////                        Log.v("TAG", ds.child("completionTimes").getValue(List<Long>));
+////                        DataSnapshot dt = ds.child("completionTimes").getChildren();
+//                        completionTime.add(ds.child("completionTimes").getValue(List<Long>));
+//                        String temp = ds.child("name").getValue(String.class);
+//                        // gets list of all names
+//                        Log.v("TAG", temp);
+//                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
 
             Intent intent = new Intent(this, AfterBeatingGameVideoActivity.class);
             startActivity(intent);

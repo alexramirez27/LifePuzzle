@@ -9,11 +9,15 @@ import android.widget.GridView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EditMemberActivity extends AppCompatActivity {
     public static String CURRENT_MEMBER_KEY = "current member";
 
     GridView gridView;
-    String[] names;
+    List<String> names;
+//    String[] names;
     int[] images;
 
     @Override
@@ -24,6 +28,8 @@ public class EditMemberActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
+
+        names = new ArrayList<>();
         getGridData();
         setGridView();
         gridViewOnClickListener();
@@ -36,12 +42,12 @@ public class EditMemberActivity extends AppCompatActivity {
      */
     private void getGridData(){
 
-        names = new String[] {"Jill Smith", "Christy Kelley", "Alexander Walker", "Eric Vazquez",
-                "John Hopkins", "Becky Alvarez", "Michelle Moore", "Dean Thomas",
-                "Jorge Schmitt", "Cody Harrison", "David Perkins", "Daniel Jordan",
-                "Cynthia Lane", "Jeremiah Lamb", "Rhonda Jones", "Thomas Barnes",
-                "Faith Rose", "Philip Mitchell", "Angel Moreno", "Jacob Jenkins",
-                "Matthew Jones","Jo Davis" , "Monica Barker" , "Amy Collins" };
+//        names = new String[] {"Jill Smith", "Christy Kelley", "Alexander Walker", "Eric Vazquez",
+//                "John Hopkins", "Becky Alvarez", "Michelle Moore", "Dean Thomas",
+//                "Jorge Schmitt", "Cody Harrison", "David Perkins", "Daniel Jordan",
+//                "Cynthia Lane", "Jeremiah Lamb", "Rhonda Jones", "Thomas Barnes",
+//                "Faith Rose", "Philip Mitchell", "Angel Moreno", "Jacob Jenkins",
+//                "Matthew Jones","Jo Davis" , "Monica Barker" , "Amy Collins" };
 
         images = new int[]{R.drawable.avatar_test, R.drawable.avatar_test, R.drawable.avatar_test,
                 R.drawable.avatar_test, R.drawable.avatar_test, R.drawable.avatar_test,
@@ -72,7 +78,7 @@ public class EditMemberActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
-                bundle.putString(CURRENT_MEMBER_KEY, names[position]);
+                bundle.putString(CURRENT_MEMBER_KEY, names.get(position));
 
                 Intent intent = new Intent(getApplicationContext(), AddMemberActivity.class);
                 intent.putExtras(bundle);
