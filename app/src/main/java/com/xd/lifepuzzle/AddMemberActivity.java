@@ -107,7 +107,12 @@ public class AddMemberActivity extends AppCompatActivity {
         // creates new user
         Member member = new Member(name.getText().toString(), relationship.getText().toString(), key);
         // sends member to firebase
-        myRef.child(key).setValue(member);
+
+        // Creates Member which can be references on Main Menu
+        myRef.child(name.getText().toString());
+        // Creates Unique ID per puzzle which can be used on puzzle selection
+        myRef.child(name.getText().toString()).child(key).setValue(member);
+
 
         Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);

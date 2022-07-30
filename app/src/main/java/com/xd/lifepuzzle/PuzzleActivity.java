@@ -330,17 +330,21 @@ public class PuzzleActivity extends AppCompatActivity {
             myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    // currentPuzzle data should be passed by intent or be public when selecting puzzle
-                    String name = "michael fischer";
+                    String name = "Michael Fischer";
                     String relationship = "friend";
-                    String key = "-N8Ctc1IR-gGKPvX3B9P";
+                    String key = "-N8CwINMif-BzfQNfWXo";
                     // TODO get current completionTime list from database
                     List<Long> completionTime = new ArrayList<>();
                     completionTime.add(elapsedMillis);
 
 //                    String key = myRef.push().getKey();
+                    // currentPuzzle data should be passed by intent or be public when selecting puzzle
+                    // Creates Member which can be references on Main Menu
                     Member member = new Member(name, relationship, key, completionTime);
-                    myRef.child(key).setValue(member);
+                    myRef.child(name);
+                    // Creates Unique ID per puzzle which can be used on puzzle selection
+                    myRef.child(name).child(key).setValue(member);
+
 
 
 //                    for(DataSnapshot ds : snapshot.getChildren()) {
