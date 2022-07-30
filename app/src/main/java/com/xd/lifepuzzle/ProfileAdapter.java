@@ -8,13 +8,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class ProfileAdapter extends BaseAdapter {
     LayoutInflater layoutInflater;
     Context context;
-    String[] name;
+    List<String> name;
     int[] image;
 
-    public ProfileAdapter(Context context, String[] name, int[] image) {
+    public ProfileAdapter(Context context, List<String> name, int[] image) {
         this.context = context;
         this.name = name;
         this.image = image;
@@ -22,7 +24,7 @@ public class ProfileAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return name.length;
+        return name.size();
     }
 
     @Override
@@ -50,7 +52,7 @@ public class ProfileAdapter extends BaseAdapter {
         TextView textView = view.findViewById(R.id.item_name);
 
         imageView.setImageResource(image[position]);
-        textView.setText(name[position]);
+        textView.setText(name.get(position));
 
         return view;
     }
