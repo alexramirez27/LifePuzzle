@@ -51,7 +51,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/dark_blue"
-            android:checked="false"
+            android:checked="true"
             android:text="Sound"
             android:textOff="SOUND OFF"
             android:textOn="SOUND ON"

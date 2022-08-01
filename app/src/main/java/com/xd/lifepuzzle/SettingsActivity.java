@@ -2,6 +2,7 @@ package com.xd.lifepuzzle;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -23,13 +25,15 @@ public class SettingsActivity extends AppCompatActivity {
     Switch aSwitch;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
         // Enable "up" on toolbar
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+
 
         seekbarVol = findViewById(R.id.seekbar_Volume);
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -49,30 +53,37 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
-        mediaPlayer = MediaPlayer.create(this,R.raw.lofistudy);
+
+        // save switch state in shared preferences
         aSwitch = findViewById(R.id.switch_audio);
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    Toast.makeText(getBaseContext(), "ON", Toast.LENGTH_SHORT).show();
-                    mediaPlayer.start();
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if (isChecked)
+                {
+                    // when switch is checked upon clicking
+                    aSwitch.setChecked(true);
+                    Intent intent = new Intent(SettingsActivity.this, BackgroundsoundService.class);
+                    startService(intent);
                 }
-                if (!isChecked) {
-                    Toast.makeText(getBaseContext(), "OFF", Toast.LENGTH_SHORT).show();
-                    mediaPlayer.pause();
+                else
+                {
+                    // when switch is unchecked upon clicking
+                    aSwitch.setChecked(false);
+                    stopService(new Intent(SettingsActivity.this, BackgroundsoundService.class));
                 }
             }
         });
     }
+
     /** called when the "Main Menu" button is pressed*/
     public void editGame(View view)
     {
@@ -84,9 +95,9 @@ public class SettingsActivity extends AppCompatActivity {
     public void sign_user_out(View view)
     {
         /** signs out user and brings user back to the MainActivity; music stops playing */
+        stopService(new Intent(SettingsActivity.this, BackgroundsoundService.class));
         Intent intent = new Intent(SettingsActivity.this, FirstInstallActivity.class);
         startActivity(intent);
-        mediaPlayer.stop();
     }
 }
 
