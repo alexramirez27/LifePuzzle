@@ -1,28 +1,33 @@
 package com.xd.lifepuzzle;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoginViewModel extends ViewModel {
-    private MutableLiveData<List<String>> names;
+    public MutableLiveData<List<String>> _names;
+    private List<String> temp;
 
     public LiveData<List<String>> getNames() {
-        if (names == null){
-            names = new MutableLiveData<List<String>>();
+        if (_names == null){
+            _names = new MutableLiveData<List<String>>();
 
         }
-        return names;
+        return _names;
     }
 
     public void addName(String name) {
-        names = new MutableLiveData<>();
-        List<String> test = names.getValue();
-        test.add(name);
-
-        names.setValue(test);
+        temp = _names.getValue();
+        if (temp == null){
+            temp = new ArrayList<>();
+        }
+        temp.add(name);
+        _names.setValue(temp);
     }
 
 }

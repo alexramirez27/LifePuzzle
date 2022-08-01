@@ -241,12 +241,13 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 //                    }
 //                });
 
-        // TODO: get user key
-        Bundle bundle = new Bundle();
-        bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
+
+        Information.userID = key;
+//        Bundle bundle = new Bundle();
+//        bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
 
         Intent intent = new Intent(this, MainMenuActivity.class);
-        intent.putExtras(bundle);
+//        intent.putExtras(bundle);
         startActivity(intent);
 
     }

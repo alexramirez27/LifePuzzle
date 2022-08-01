@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    public static String currentUserID;
+//    public static String currentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +27,17 @@ public class MainMenuActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        try{
-            Intent intent = getIntent();
-            currentUserID = intent.getStringExtra(LoginActivity.CURRENT_USER_KEY);
-            Log.v("TAG", currentUserID);
-        } catch (Exception e){
-
+//        try{
+//            Intent intent = getIntent();
+        if (Information.userID != null){
+            Log.v("TAG", "Information class");
+            Log.v("TAG", Information.userID);
         }
+//            currentUserID = intent.getStringExtra(LoginActivity.CURRENT_USER_KEY);
+//            Log.v("TAG", currentUserID);
+//        } catch (Exception e){
+//
+//        }
 
 
 

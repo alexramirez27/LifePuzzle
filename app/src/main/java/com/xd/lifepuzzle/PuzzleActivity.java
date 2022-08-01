@@ -331,32 +331,35 @@ public class PuzzleActivity extends AppCompatActivity {
             String completion = "completionTimes";
 
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("Members").child(MainMenuActivity.currentUserID);
-            DatabaseReference puzzleRef = database.getReference("Members").child(MainMenuActivity.currentUserID).child(name).child(key).child(completion);
+            DatabaseReference myRef = database.getReference("Members").child(Information.userID);
+            DatabaseReference puzzleRef = database.getReference("Members").child(Information.userID).child(name).child(key).child(completion);
 
-            // TODO get current completionTime list from database
+            // revert
+//            DatabaseReference myRef = database.getReference("Members").child(MainMenuActivity.currentUserID);
+//            DatabaseReference puzzleRef = database.getReference("Members").child(MainMenuActivity.currentUserID).child(name).child(key).child(completion);
+
+
             List<Long> completionTime = new ArrayList<>();
 
-            // TODO check why puzzle ref is not running properly
-            Log.v("TAG", "first ");
-            puzzleRef.addValueEventListener(new ValueEventListener() {
+            puzzleRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Log.v("TAG", "second ");
+                    // adds currentCompletionTimeList
+                    // May be able to store this in puzzle Information and just add to it
+//                    List<Long> testTime = snapshot.child("completionTimes").getValue(List.class);
+//                    for (int i = 0; i < testTime.size(); i++){
+//                        Log.v("TAG", testTime.get(i).toString());
+//                    }
                     for(DataSnapshot ds : snapshot.getChildren()) {
-                        String temp2 = ds.toString();
-                        Long temp = ds.child("0").getValue(Long.class);
-                        completionTime.add(ds.child("0").getValue(Long.class));
-//                                names.add(ds.child("name").getValue(String.class));
-//                                uniqueID.add(ds.child("uniqueID").getValue(String.class));
-//                                String temp = ds.child("name").getValue(String.class);
-                        // gets list of all names
-                        Log.v("TAG", temp.toString());
-                        Log.v("TAG", temp2.toString());
-
-
-
+                        completionTime.add(ds.getValue(Long.class));
                     }
+                    completionTime.add(elapsedMillis);
+                    Member member = new Member(name, relationship, key, completionTime);
+                    // Creates Unique ID per puzzle which can be used on puzzle selection
+                    myRef.child(name).child(key).setValue(member);
+
+                    newActivity();
+
 
 
                 }
@@ -366,38 +369,35 @@ public class PuzzleActivity extends AppCompatActivity {
 
                 }
             });
-            // never ran
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Log.v("TAG", "third ");
-                    completionTime.add(elapsedMillis);
 
-//                    String key = myRef.push().getKey();
-                    // currentPuzzle data should be passed by intent or be public when selecting puzzle
-                    // Creates Member which can be references on Main Menu
-                    Member member = new Member(name, relationship, key, completionTime);
-//                    myRef.child(name);
-                    // Creates Unique ID per puzzle which can be used on puzzle selection
-                    myRef.child(name).child(key).setValue(member);
-
-//            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
 //                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                public void run() {
+//                    Log.v("TAG", "fourth ");
 //
 //
+////                    String key = myRef.push().getKey();
+//                    // currentPuzzle data should be passed by intent or be public when selecting puzzle
+//                    // Creates Member which can be references on Main Menu
 //
 //
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
+////            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+////                @Override
+////                public void onDataChange(@NonNull DataSnapshot snapshot) {
+////
+////
+////
+////
+////                @Override
+////                public void onCancelled(@NonNull DatabaseError error) {
+////
+////                }
+////            });
+//
 //
 //                }
-//            });
-
-                    newActivity();
-                }
-            }, 1000);
+//            }, 2000);
 
 
 
