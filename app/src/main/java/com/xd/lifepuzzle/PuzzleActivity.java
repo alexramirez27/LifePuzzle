@@ -67,6 +67,8 @@ public class PuzzleActivity extends AppCompatActivity {
         mCurrentPhotoPath = intent.getStringExtra("mCurrentPhotoPath");
         mCurrentPhotoUri = intent.getStringExtra("mCurrentPhotoUri");
 
+
+
         chronometer = findViewById(R.id.chronometer);
         chronometer.setVisibility(View.GONE);
         chronometer.start();
