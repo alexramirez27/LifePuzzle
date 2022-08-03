@@ -26,6 +26,7 @@ import androidx.core.content.FileProvider;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -49,10 +50,41 @@ public class SelectGameActivity extends AppCompatActivity {
     static final int REQUEST_PERMISSION_READ_EXTERNAL_STORAGE = 3;
     static final int REQUEST_IMAGE_GALLERY = 4;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_game);
+
+
+        Button easy = (Button) findViewById(R.id.difficult1);
+        easy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(SelectGameActivity.this, PuzzleActivity.class);
+                intent1.putExtra("difficulty", 1);
+                startActivity(intent1);
+            }
+        });
+        Button medium = (Button) findViewById(R.id.difficult2);
+        medium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(SelectGameActivity.this, PuzzleActivity.class);
+                intent2.putExtra("difficulty", 2);
+                startActivity(intent2);
+            }
+        });
+        Button hard = (Button) findViewById(R.id.difficult3);
+        medium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(SelectGameActivity.this, PuzzleActivity.class);
+                intent3.putExtra("difficulty", 3);
+                startActivity(intent3);
+            }
+        });
 
         // Enable "up" on toolbar
         ActionBar ab = getSupportActionBar();
@@ -77,6 +109,7 @@ public class SelectGameActivity extends AppCompatActivity {
         }
 
     }
+
     public void onImageFromCameraClick(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(getPackageManager()) != null) {
