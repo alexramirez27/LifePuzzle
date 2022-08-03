@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.xd.lifepuzzle">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--    TODO ADD UTIL PERMISSIONS FOR START OF APP-->
 
     <application
         android:allowBackup="true"
@@ -14,13 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LifePuzzle"
-        tools:targetApi="31" >
+        tools:targetApi="31">
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            >
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,74 +29,74 @@
         <activity
             android:name=".LoginActivity"
             android:exported="false"
+            android:label="Log In"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="sensorPortrait"
-            android:label="Log In"/>
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".FirstInstallActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            android:label="First Install"/>
+            android:label="First Install"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SignupActivity"
             android:exported="false"
+            android:label="Sign Up"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"
-            android:label="Sign Up"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AddMemberActivity"
             android:exported="false"
+            android:label="Add Member"
             android:parentActivityName=".CaregiverActivity"
-            android:screenOrientation="portrait"
-            android:label="Add Member"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".EditMemberActivity"
             android:exported="false"
+            android:label="Edit Member"
             android:parentActivityName=".CaregiverActivity"
-            android:screenOrientation="portrait"
-            android:label="Edit Member"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainMenuActivity"
             android:exported="false"
+            android:label="Main Menu"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"
-            android:label="Main Menu"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SelectGameActivity"
             android:exported="false"
+            android:label="Select Game Activity"
             android:parentActivityName=".MainMenuActivity"
-            android:screenOrientation="portrait"
-            android:label="Select Game Activity"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".PuzzleActivity"
             android:exported="false"
+            android:label="Puzzle"
             android:parentActivityName=".SelectGameActivity"
-            android:screenOrientation="portrait"
-            android:label="Puzzle" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
+            android:label="Settings"
             android:parentActivityName=".MainMenuActivity"
-            android:screenOrientation="portrait"
-            android:label="Settings"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CaregiverActivity"
             android:exported="false"
+            android:label="Caregiver Mode"
             android:parentActivityName=".MainMenuActivity"
-            android:screenOrientation="portrait"
-            android:label="Caregiver Mode"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MemoryActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            android:label="Memory"/>
+            android:label="Memory"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AfterBeatingGameVideoActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
+            android:label="You&apos;ve Completed the Puzzle!"
             android:parentActivityName=".SelectGameActivity"
-            android:label="You've Completed the Puzzle!"/>
-
+            android:screenOrientation="portrait" />
+        <service android:name=".BackgroundsoundService" />
     </application>
 
 </manifest>

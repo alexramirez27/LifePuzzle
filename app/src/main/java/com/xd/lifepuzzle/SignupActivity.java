@@ -249,7 +249,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = new Intent(this, MainMenuActivity.class);
 //        intent.putExtras(bundle);
         startActivity(intent);
-
     }
     /** called when the medicalAvatar is clicked */
     public void assistDiagnosis(View v)

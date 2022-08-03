@@ -49,12 +49,17 @@ public class PuzzleActivity extends AppCompatActivity {
     String mCurrentPhotoPath;
     String mCurrentPhotoUri;
 
+
+
+
     private Chronometer chronometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puzzle);
+
+
         // Enable "up" on toolbar
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
@@ -188,9 +193,25 @@ public class PuzzleActivity extends AppCompatActivity {
     }
 
     private ArrayList<PuzzlePiece> splitImage() {
-        int piecesNumber = 12;
-        int rows = 4;
-        int cols = 3;
+        Intent difficultyIntent = getIntent();
+        int gameDifficulty = difficultyIntent.getIntExtra("difficulty",2);
+        int setRowNumber= 4;
+        int setColNumber= 3;
+        if(gameDifficulty == 3){
+            setRowNumber = 12;
+            setColNumber = 9;
+        }
+        else if(gameDifficulty == 2){
+            setRowNumber = 8;
+            setColNumber = 6;
+        }
+        else{
+            setRowNumber = 4;
+            setColNumber = 3;
+        }
+        int rows = setRowNumber;
+        int cols = setColNumber;
+        int piecesNumber = rows*cols;
 
         ImageView imageView = findViewById(R.id.imageView);
         ArrayList<PuzzlePiece> pieces = new ArrayList<>(piecesNumber);
