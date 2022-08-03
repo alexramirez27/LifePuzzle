@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/hidePuzzle"
+        android:checkable="true"
+        android:checked="true"
+        android:icon="@drawable/ic_hide_pwd"
+        android:title="Hide Puzzle image"
+        android:visible="true"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/gear_icon"
+        android:title="Settings"
+        android:onClick="goToSettingsActivity"
+        app:showAsAction="always" />
+
+</menu>

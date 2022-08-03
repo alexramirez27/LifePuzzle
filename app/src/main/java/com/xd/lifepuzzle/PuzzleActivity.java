@@ -23,6 +23,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageView;
@@ -59,6 +61,12 @@ public class PuzzleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puzzle);
 
+
+        // background sound starts playing
+        /* music can be turned off anytime from Settings activity
+         * and will start playing on next Login */
+        /* music can be turned off anytime from Settings activity */
+        startService(new Intent(this, BackgroundsoundService.class));
 
         // Enable "up" on toolbar
         ActionBar ab = getSupportActionBar();
@@ -105,6 +113,52 @@ public class PuzzleActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // inflate the menu:
+        getMenuInflater().inflate(R.menu.menu_puzzle, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        switch(item.getItemId())
+        {
+            case R.id.settings:
+                goToSettingsActivity(item);
+                return true;
+            case R.id.hidePuzzle:
+                showHideCanvasImage(item);
+            default: return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /** called when the Settings icon is clicked from Actionbar */
+    public void goToSettingsActivity(MenuItem menuItem)
+    {
+        Intent intent = new Intent(PuzzleActivity.this, SettingsActivity.class);
+        startActivity(intent);
+        Toast.makeText(PuzzleActivity.this, "Redirecting to Settings",
+                Toast.LENGTH_SHORT).show();
+    }
+    /** called when the eye icon is clicked on Puzzle Activity */
+    public void showHideCanvasImage(MenuItem menuItem)
+    {
+        Log.v("TAG", "eye called");
+        if (menuItem.isChecked() == true)
+        {
+            menuItem.setIcon(R.drawable.ic_show_pwd);
+            menuItem.setChecked(false);
+        }
+        else
+        {
+            menuItem.setIcon(R.drawable.ic_hide_pwd);
+            menuItem.setChecked(true);
+        }
     }
 
     private void setPicFromAsset(String assetName, ImageView imageView) {
