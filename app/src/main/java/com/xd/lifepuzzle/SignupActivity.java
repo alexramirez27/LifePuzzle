@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -33,6 +34,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -232,7 +234,62 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     private void signUpBtn(int holder){
 
-        // if and else used to be here
+        if ( mImageUri != null ) {
+            // Toast.makeText(SignupActivity.this, "The mImageUri is not null", Toast.LENGTH_LONG).show();
+            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                    + "." + getFileExtension(mImageUri));
+
+            mUploadTask = fileReference.putFile(mImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mProgressBar.setProgress(0);
+                                }
+                            }, 50);
+
+                            Toast.makeText(SignupActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
+
+                            // retrieve the download URL and send it to the DB
+                            // reference: https://stackoverflow.com/a/55503926
+
+                            if (taskSnapshot.getMetadata() != null) {
+                                if (taskSnapshot.getMetadata().getReference() != null) {
+                                    Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                                    result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            String imageUrl = uri.toString();
+                                            //createNewPost(imageUrl);
+                                            Upload upload = new Upload(editTextName.getText().toString().trim(), imageUrl);
+                                            String uploadId = mDatabaseRef.push().getKey();
+                                            mDatabaseRef.child(uploadId).setValue(upload);
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                            double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                            mProgressBar.setProgress((int) progress);
+                        }
+                    });
+        }
+        else {
+            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+        }
 
         String fullName = editTextName.getText().toString().trim();
         String age = editTextAge.getText().toString().trim();
