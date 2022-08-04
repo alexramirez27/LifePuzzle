@@ -11,13 +11,12 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/graphTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_weight="0.05"
             android:gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:text="Mike's Puzzle"
             android:textColor="#167D96"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -31,7 +30,8 @@
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barchart"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
             </com.github.mikephil.charting.charts.BarChart>
 
         </LinearLayout>
@@ -52,19 +52,31 @@
 
 
                 <Button
-                    android:id="@+id/button7"
+                    android:id="@+id/button9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="#167d96"
-                    android:text="Previous Member" />
+                    android:onClick="switchBarChart"
+                    android:text="Change Graph" />
 
                 <Button
-                    android:id="@+id/button8"
+                    android:id="@+id/previousMemberBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="#167d96"
+                    android:onClick="previousMemberButtonClicked"
+                    android:text="Previous Member" />
+
+
+                <Button
+                    android:id="@+id/nextMemberBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#167d96"
+                    android:onClick="nextMemberButtonClicked"
                     android:text="Next Member" />
             </LinearLayout>
 
@@ -94,6 +106,7 @@
 
                         <ImageView
                             android:id="@+id/imageView3"
+                            android:layout_marginTop="10dp"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
                             android:layout_weight="1"
@@ -108,58 +121,20 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView14"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="   Name of patient:"
-                            android:textColor="#000000"
-                            android:textSize="24sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView15"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="   Gender:"
-                            android:textColor="#000000"
-                            android:textSize="24sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView16"
+                            android:id="@+id/nameOfPatientText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="   Stage of Dementia:"
-                            android:textColor="#000000"
+                            android:text = "   Name: "
+                            android:textStyle="bold"
+                            android:textColor ="#000000"
                             android:textSize="24sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                            />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView17"
+                        <EditText
+                            android:id="@+id/nameOfPatientEdit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="   Email:"
+                            android:text="Name"
                             android:textColor="#000000"
                             android:textSize="24sp"
                             android:textStyle="bold" />
@@ -172,11 +147,19 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView18"
+                            android:id="@+id/ageOfPatientText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="   Family Members:"
+                            android:text="   Age: "
+                            android:textColor="#000000"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/ageOfPatientEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="age"
                             android:textColor="#000000"
                             android:textSize="24sp"
                             android:textStyle="bold" />
@@ -188,7 +171,107 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView19"
+                            android:id="@+id/genderOfPatientText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="   Gender: "
+                            android:textColor="#000000"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/genderOfPatientEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="gender"
+                            android:textColor="#000000"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/stageOfPatientText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="   Stage: "
+                            android:textColor="#000000"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/stageOfPatientEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="stage"
+                            android:textColor="#000000"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/emailOfPatientText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="   Email: "
+                            android:textColor="#000000"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/emailOfPatientEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="email@gmail.com"
+                            android:textColor="#000000"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/phoneNoOfPatientText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="   Phone Number: "
+                            android:textColor="#000000"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/phoneNoOfPatientEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="778-123-1234"
+                            android:textColor="#000000"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView20"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -204,7 +287,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView20"
+                            android:id="@+id/textView21"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -244,8 +327,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:backgroundTint="#167d96"
-                android:onClick="launchEditMember"
-                android:text="Edit Patient Info"
+                android:onClick="sendUserInfoToDB"
+                android:text="Update Patient Info"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/CMPT_362/LifePuzzle/app/src/main/res/drawable-anydpi/ic_baseline_info_24.xml" value="0.2205" />
         <entry key="..\:/CMPT_362/LifePuzzle/app/src/main/res/layout/activity_add_member.xml" value="0.27887537993920974" />
+        <entry key="..\:/CMPT_362/LifePuzzle/app/src/main/res/layout/activity_after_beating_game_congratulations.xml" value="0.21555217831813578" />
         <entry key="..\:/CMPT_362/LifePuzzle/app/src/main/res/layout/activity_caregiver.xml" value="0.2793819655521783" />
         <entry key="..\:/CMPT_362/LifePuzzle/app/src/main/res/layout/activity_edit_member.xml" value="0.27887537993920974" />
         <entry key="..\:/CMPT_362/LifePuzzle/app/src/main/res/layout/activity_first_installation_page.xml" value="0.27684903748733536" />
@@ -11,7 +13,7 @@
         <entry key="..\:/CMPT_362/LifePuzzle/app/src/main/res/layout/activity_login_1.xml" value="0.15932117527862208" />
         <entry key="..\:/CMPT_362/LifePuzzle/app/src/main/res/layout/activity_login_2.xml" value="0.32760416666666664" />
         <entry key="..\:/CMPT_362/LifePuzzle/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/CMPT_362/LifePuzzle/app/src/main/res/layout/activity_main_menu.xml" value="0.27760891590678827" />
+        <entry key="..\:/CMPT_362/LifePuzzle/app/src/main/res/layout/activity_main_menu.xml" value="0.1" />
         <entry key="..\:/CMPT_362/LifePuzzle/app/src/main/res/layout/activity_puzzle.xml" value="0.46059782608695654" />
         <entry key="..\:/CMPT_362/LifePuzzle/app/src/main/res/layout/activity_select_game.xml" value="0.2574074074074074" />
         <entry key="..\:/CMPT_362/LifePuzzle/app/src/main/res/layout/activity_settings.xml" value="0.5318021201413428" />

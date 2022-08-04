@@ -58,7 +58,9 @@
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,98 +68,18 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:layout_constraintVertical_bias="0.0">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <GridView
+            android:id="@+id/mainMenuGridView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:columnWidth="160dp"
+            android:numColumns="auto_fit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/imageView28"
-                    android:layout_width="170dp"
-                    android:layout_height="195dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:onClick="launchPuzzle"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView30"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/randompuzzle_icon" />
-
-                <ImageView
-                    android:id="@+id/imageView30"
-                    android:layout_width="170dp"
-                    android:layout_height="195dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:onClick="launchPuzzle"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/imageView28"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/avatar_test" />
-
-                <ImageView
-                    android:id="@+id/imageView32"
-                    android:layout_width="170dp"
-                    android:layout_height="195dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:onClick="launchPuzzle"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView33"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView28"
-                    app:srcCompat="@drawable/avatar_test" />
-
-                <ImageView
-                    android:id="@+id/imageView33"
-                    android:layout_width="170dp"
-                    android:layout_height="195dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:onClick="launchPuzzle"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/imageView32"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView30"
-                    app:srcCompat="@drawable/avatar_test" />
-
-                <ImageView
-                    android:id="@+id/imageView34"
-                    android:layout_width="170dp"
-                    android:layout_height="195dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:onClick="launchPuzzle"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView35"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView32"
-                    app:srcCompat="@drawable/avatar_test" />
-
-                <ImageView
-                    android:id="@+id/imageView35"
-                    android:layout_width="170dp"
-                    android:layout_height="195dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:onClick="launchPuzzle"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/imageView34"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView33"
-                    app:srcCompat="@drawable/avatar_test" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
