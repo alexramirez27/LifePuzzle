@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.xd.lifepuzzle">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -15,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LifePuzzle"
         tools:targetApi="31">
+        <activity
+            android:name=".ImagesActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
@@ -96,6 +100,7 @@
             android:label="You&apos;ve Completed the Puzzle!"
             android:parentActivityName=".SelectGameActivity"
             android:screenOrientation="portrait" />
+
         <service android:name=".BackgroundsoundService" />
     </application>
 
