@@ -56,6 +56,8 @@ public class PuzzleActivity extends AppCompatActivity {
 
     private Chronometer chronometer;
 
+    private ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +75,8 @@ public class PuzzleActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         final RelativeLayout layout = findViewById(R.id.layout);
-        final ImageView imageView = findViewById(R.id.imageView);
+        imageView = findViewById(R.id.imageView);
+//        final ImageView imageView = findViewById(R.id.imageView);
 
         Intent intent = getIntent();
         final String assetName = intent.getStringExtra("assetName");
@@ -151,11 +154,13 @@ public class PuzzleActivity extends AppCompatActivity {
         Log.v("TAG", "eye called");
         if (menuItem.isChecked() == true)
         {
+            imageView.setVisibility(View.VISIBLE);
             menuItem.setIcon(R.drawable.ic_show_pwd);
             menuItem.setChecked(false);
         }
         else
         {
+            imageView.setVisibility(View.INVISIBLE);
             menuItem.setIcon(R.drawable.ic_hide_pwd);
             menuItem.setChecked(true);
         }
