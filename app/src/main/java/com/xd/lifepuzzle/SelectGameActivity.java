@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -29,6 +30,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import java.io.File;
@@ -50,6 +53,8 @@ public class SelectGameActivity extends AppCompatActivity {
     static final int REQUEST_PERMISSION_READ_EXTERNAL_STORAGE = 3;
     static final int REQUEST_IMAGE_GALLERY = 4;
 
+    private int currentDifficulty=1;
+
 
 
     @Override
@@ -57,32 +62,21 @@ public class SelectGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_game);
 
-
-        Button easy = (Button) findViewById(R.id.difficult1);
-        easy.setOnClickListener(new View.OnClickListener() {
+        RadioGroup radioGroupSetDifficulty;
+        radioGroupSetDifficulty = findViewById(R.id.radioGroupSetDifficulty);
+        radioGroupSetDifficulty.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(SelectGameActivity.this, PuzzleActivity.class);
-                intent1.putExtra("difficulty", 1);
-                startActivity(intent1);
-            }
-        });
-        Button medium = (Button) findViewById(R.id.difficult2);
-        medium.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent2 = new Intent(SelectGameActivity.this, PuzzleActivity.class);
-                intent2.putExtra("difficulty", 2);
-                startActivity(intent2);
-            }
-        });
-        Button hard = (Button) findViewById(R.id.difficult3);
-        medium.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent3 = new Intent(SelectGameActivity.this, PuzzleActivity.class);
-                intent3.putExtra("difficulty", 3);
-                startActivity(intent3);
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.radioEasy:
+                        currentDifficulty = 1;
+                        break;
+                    case R.id.radioMedium:
+                        currentDifficulty = 2;
+                        break;
+                    case R.id.radioHard:
+                        currentDifficulty = 3;
+                }
             }
         });
 
@@ -101,6 +95,15 @@ public class SelectGameActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Intent intent = new Intent(getApplicationContext(), PuzzleActivity.class);
                     intent.putExtra("assetName", files[i % files.length]);
+                    if(currentDifficulty == 3){
+                        intent.putExtra("difficulty", 3);
+                    }
+                    else if(currentDifficulty == 2){
+                        intent.putExtra("difficulty", 2);
+                    }
+                    else{
+                        intent.putExtra("difficulty", 1);
+                    }
                     startActivity(intent);
                 }
             });

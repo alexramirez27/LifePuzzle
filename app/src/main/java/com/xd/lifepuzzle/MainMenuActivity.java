@@ -201,7 +201,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString(Information.userID, uniqueIDs.get(position));
 
-                Intent intent = new Intent(getApplicationContext(), PuzzleActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SelectGameActivity.class);
                 intent.putExtras(bundle);
 //
                 startActivity(intent);
