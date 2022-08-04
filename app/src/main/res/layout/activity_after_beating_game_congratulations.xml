@@ -52,7 +52,7 @@
         app:layout_constraintGuide_percent = "0.75" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/previousMemberBtn"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:onClick="launchMainMenuActivity"
@@ -103,7 +103,7 @@
         />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/nextMemberBtn"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:onClick="playAudio"
