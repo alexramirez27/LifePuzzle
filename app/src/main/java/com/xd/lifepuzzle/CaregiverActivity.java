@@ -71,12 +71,7 @@ public class CaregiverActivity extends AppCompatActivity {
 
         currentUserID = Information.userID;
 
-        try{
-            getMemberData();
-        } catch (Exception e){
-
-        }
-
+        getMemberData();
     }
 
     /**

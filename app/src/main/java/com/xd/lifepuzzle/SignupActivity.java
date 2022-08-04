@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -89,7 +90,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private static final int PICK_IMAGE_REQUEST = 1;
 
     // More Variables
-    // private DatabaseReference mDatabaseRef;
+    private DatabaseReference mDatabaseRef;
 
     private ProgressBar mProgressBar;
 
@@ -98,8 +99,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private StorageTask mUploadTask;
 
     private TextView mTextViewShowUploads;
-
-    DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,8 +136,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         // storage = FirebaseStorage.getInstance();
 
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("UserProfilePictures"); // This means we will save it in a folder called uploads in our storage
-        // mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads"); // This means we will save it in a folder called uploads in our storage
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
 
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
@@ -233,7 +232,62 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     private void signUpBtn(int holder){
 
-        // if and else used to be here
+        if ( mImageUri != null ) {
+            // Toast.makeText(SignupActivity.this, "The mImageUri is not null", Toast.LENGTH_LONG).show();
+            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                    + "." + getFileExtension(mImageUri));
+
+            mUploadTask = fileReference.putFile(mImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mProgressBar.setProgress(0);
+                                }
+                            }, 50);
+
+                            Toast.makeText(SignupActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
+
+                            // retrieve the download URL and send it to the DB
+                            // reference: https://stackoverflow.com/a/55503926
+
+                            if (taskSnapshot.getMetadata() != null) {
+                                if (taskSnapshot.getMetadata().getReference() != null) {
+                                    Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                                    result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            String imageUrl = uri.toString();
+                                            //createNewPost(imageUrl);
+                                            Upload upload = new Upload(editTextName.getText().toString().trim(), imageUrl);
+                                            String uploadId = mDatabaseRef.push().getKey();
+                                            mDatabaseRef.child(uploadId).setValue(upload);
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                            double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                            mProgressBar.setProgress((int) progress);
+                        }
+                    });
+        }
+        else {
+            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+        }
 
         String fullName = editTextName.getText().toString().trim();
         String age = editTextAge.getText().toString().trim();
@@ -262,14 +316,14 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         if(email.isEmpty()){
-            editTextEmail.setError("Email is required");
-            editTextEmail.requestFocus();
+            editTextName.setError("Email is required");
+            editTextName.requestFocus();
             return;
         }
 
         if(phoneNo.isEmpty()){
-            editTextPhoneNo.setError("Phone number is required");
-            editTextPhoneNo.requestFocus();
+            editTextName.setError("Phone number is required");
+            editTextName.requestFocus();
             return;
         }
 
@@ -299,99 +353,22 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 //        How to push new user to database
 //        User user = new User("test 5", "18", "bob@gmail.com", "1234567", "Male");
 
-        // Right here
+        String key = myRef.push().getKey();
+        User user = new User(fullName, age, email, phoneNo, finalGender, key);
+        myRef.child(key).setValue(user);
 
 
-        //String tempImageUrl;
-        UploadTask.TaskSnapshot tempSnapshot;
-        if ( mImageUri != null ) {
-            // Toast.makeText(SignupActivity.this, "The mImageUri is not null", Toast.LENGTH_LONG).show();
-            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
-                    + "." + getFileExtension(mImageUri));
 
-            mUploadTask = fileReference.putFile(mImageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    mProgressBar.setProgress(0);
-                                }
-                            }, 50);
-
-                            // Upload task
-                            Toast.makeText(SignupActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-
-                            // Upload Object Below, we will comment it out for now
-                            //Upload upload = new Upload(editTextName.getText().toString().trim(),
-                            //taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
-
-                            if (taskSnapshot.getMetadata() != null) {
-                                if (taskSnapshot.getMetadata().getReference() != null) {
-                                    Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
-                                    result.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            String tempImageUrl = uri.toString();
-
-                                            String key = myRef.push().getKey();
-                                            User user = new User(fullName, age, email, phoneNo, finalGender, tempImageUrl, key);
-                                            myRef.child(key).setValue(user);
-
-                                            // TODO: get user key
-                                            Bundle bundle = new Bundle();
-                                            bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
-
-                                            //uploadPicture(); // Maybe move this to when submit is clicked
-
-                                            Intent intent = new Intent(SignupActivity.this, MainMenuActivity.class);
-                                            intent.putExtras(bundle);
-                                            startActivity(intent);
-
-                                        }
-                                    });
-                                }
-                            }
-
-                            //String uploadId = myRef.push().getKey();
-                            //myRef.child(uploadId).setValue(upload);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                            double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                            mProgressBar.setProgress((int) progress);
-                        }
-                    });
-        }
-        else {
-            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
-        }
-
-
-//        String key = myRef.push().getKey();
-//        User user = new User(fullName, age, email, phoneNo, finalGender, tempImageUrl, key);
-//        myRef.child(key).setValue(user);
-
-
-//        // TODO: get user key
-//        Bundle bundle = new Bundle();
-//        bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
+        Bundle bundle = new Bundle();
+        bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
 
         //uploadPicture(); // Maybe move this to when submit is clicked
 
-//        Intent intent = new Intent(this, MainMenuActivity.class);
-//        intent.putExtras(bundle);
-//        startActivity(intent);
+        Information.userID = key;
+
+        Intent intent = new Intent(this, MainMenuActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
     /** called when the medicalAvatar is clicked */
     public void assistDiagnosis(View v)

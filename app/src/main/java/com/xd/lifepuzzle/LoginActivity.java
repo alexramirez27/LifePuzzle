@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // background sound starts playing
         /* music can be turned off anytime from Settings activity
-        * and will start playing on next Login */
+         * and will start playing on next Login */
         startService(new Intent(this, BackgroundsoundService.class));
 
         // Enable "up" on toolbar
