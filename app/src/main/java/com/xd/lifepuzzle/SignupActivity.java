@@ -1,30 +1,56 @@
 package com.xd.lifepuzzle;
 
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
+
+import org.w3c.dom.Text;
+
+import java.io.File;
+import java.util.UUID;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
 
     // Profile Picture and Change Button
-    ImageView profilePicture;
     Button changeButton;
     private final int SELECT_PHOTO = 101;
     private final int CAPTURE_PHOTO = 102;
@@ -47,6 +73,30 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     // boolHolder
     private int holder;
+
+    // For Dialog
+    private Button changeBtn;
+    private ImageView profilePicture;
+
+    // Firebase Storage Objects
+    //private FirebaseStorage storage;
+    private StorageReference mStorageRef;
+
+    public Uri mImageUri;
+
+    // Upload
+    private static final int PICK_IMAGE_REQUEST = 1;
+
+    // More Variables
+    private DatabaseReference mDatabaseRef;
+
+    private ProgressBar mProgressBar;
+
+    private File imgFileName;
+
+    private StorageTask mUploadTask;
+
+    private TextView mTextViewShowUploads;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +130,18 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
+        // Firebase Storage
+        //storage = FirebaseStorage.getInstance();
 
+
+
+
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads"); // This means we will save it in a folder called uploads in our storage
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+
+
+
+        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -89,6 +150,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         editTextEmail = (EditText) findViewById(R.id.yourEmail);
         editTextPhoneNo = (EditText) findViewById(R.id.yourPhoneNumber);
         editTextPassword = (EditText) findViewById(R.id.yourPassword);
+        mTextViewShowUploads = (TextView) findViewById(R.id.text_view_show_uploads);
 
         radioButtonMale = (RadioButton) findViewById(R.id.radioGenderM);
         radioButtonMale.setOnClickListener(v -> {
@@ -100,37 +162,58 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             holder = 1;
         });
 
+        // Dialog below
+        profilePicture = (ImageView) findViewById(R.id.profilePicture);
+        changeBtn = (Button) findViewById(R.id.changeBtn);
+
+        // Call Change Picture Button
+        //changeBtn.setOnClickListener(v -> selectImage(SignupActivity.this));
+
+        mTextViewShowUploads.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                openImagesActivity();
+            }
+        });
+
+
+        changeBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                openFileChooser(SignupActivity.this);
+            }
+        });
+
+
+
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
 
-        signUpBtn.setOnClickListener(v -> {
-            if (v.getId() == R.id.signUpBtn) {
-                signUpBtn(holder);
+        // Call Sign Up Button
+//        signUpBtn.setOnClickListener(v -> {
+//            if (v.getId() == R.id.signUpBtn) {
+//                signUpBtn(holder);
+//            }
+//        });
+
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( View v ) {
+                if ( mUploadTask != null && mUploadTask.isInProgress()) {
+                    Toast.makeText(SignupActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if ( v.getId() == R.id.signUpBtn ) {
+                        signUpBtn(holder);
+                    }
+                }
+//                    if ( v.getId() == R.id.signUpBtn ) {
+//                        signUpBtn(holder);
+//                    }
             }
         });
 
     }
-    /**called when the user taps the "male" button*/
-//    public void sendMale(View view)
-//    {
-//        // "male" button gets clicked and becomes disabled
-//        findViewById(R.id.button).setEnabled((false));
-//        ((Button)findViewById(R.id.button)).setText(R.string.chosen_button);
-//    }
-    /**called when the user taps the "female" button*/
-//    public void sendFemale(View view)
-//    {
-//        // "female" button gets clicked and becomes disabled
-//        findViewById(R.id.button4).setEnabled(false);
-//        ((Button)findViewById(R.id.button4)).setText(R.string.chosen_button);
-//    }
-    /**called when the user taps the "Sign Up" button*/
-//    public void sign_user_up(View v)
-//    {
-//        // sign user up and open "Main Menu"
-//        v.setEnabled(false);
-//        Intent i = new Intent(this, MainMenuActivity.class);
-//        startActivity(i);
-//    }
+
 
     @Override
     public void onClick(View v) {
@@ -148,7 +231,57 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         startActivity(initateDiagnosis);
     }
 
+    // Get file extension from the image
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
     private void signUpBtn(int holder){
+
+        if ( mImageUri != null ) {
+            // Toast.makeText(SignupActivity.this, "The mImageUri is not null", Toast.LENGTH_LONG).show();
+            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                    + "." + getFileExtension(mImageUri));
+
+            mUploadTask = fileReference.putFile(mImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mProgressBar.setProgress(0);
+                                }
+                            }, 50);
+
+                            Toast.makeText(SignupActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
+                            Upload upload = new Upload(editTextName.getText().toString().trim(),
+                                    taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+                            String uploadId = mDatabaseRef.push().getKey();
+                            mDatabaseRef.child(uploadId).setValue(upload);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                            double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                            mProgressBar.setProgress((int) progress);
+                        }
+                    });
+        }
+        else {
+            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+        }
+
         String fullName = editTextName.getText().toString().trim();
         String age = editTextAge.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
@@ -217,37 +350,15 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         User user = new User(fullName, age, email, phoneNo, finalGender, key);
         myRef.child(key).setValue(user);
 
-//        mAuth.createUserWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(task -> {
-//
-//                    if(task.isSuccessful()){
-//                        User user = new User(fullName, age, email, phoneNo, finalGender);
-//
-//                        FirebaseDatabase.getInstance().getReference("Users")
-//                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                .setValue(user).addOnCompleteListener(task1 -> {
-//
-//                                    if(task1.isSuccessful()){
-//                                        Toast.makeText(SignupActivity.this, "User has been signed up successfully!", Toast.LENGTH_LONG).show();
-//                                    }
-//                                    else{
-//                                        Toast.makeText(SignupActivity.this, "Failed to sign up! Try again!", Toast.LENGTH_LONG).show();
-//                                    }
-//                                });
-//
-//                    }
-//                    else{
-//                        Toast.makeText(SignupActivity.this, "Failed to sign up! Try again!", Toast.LENGTH_LONG).show();
-//                    }
-//                });
 
+        // TODO: get user key
+        Bundle bundle = new Bundle();
+        bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
 
-        Information.userID = key;
-//        Bundle bundle = new Bundle();
-//        bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
+        //uploadPicture(); // Maybe move this to when submit is clicked
 
         Intent intent = new Intent(this, MainMenuActivity.class);
-//        intent.putExtras(bundle);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
     /** called when the medicalAvatar is clicked */
@@ -256,9 +367,53 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         /** opens webpage to AlzheimerSociety(default_location:Canada) to allow caregiver/early-stage
          * patients learn about the different stages and the procedure for getting diagnosed for
          * a particular stage
-          */
+         */
         Intent diagnosis = new Intent(Intent.ACTION_VIEW, Uri.parse("https://alzheimer.ca/en/about-dementia/do-i-have-dementia/how-get-tested-dementia"));
         startActivity(diagnosis);
+    }
+
+    private void openFileChooser(Context context) {
+        final CharSequence[] options = { "Select from Gallery","Cancel" };
+
+        androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Pick Profile Picture");
+
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+
+//                if (options[item].equals("Open Camera")) {
+//                    Intent takePicture = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+//                    //takePicture.setType("image/*");
+//                    startActivityForResult(takePicture, 0);
+
+                if (options[item].equals("Select from Gallery")) {
+                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(pickPhoto , 1);
+
+                } else if (options[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if ( requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null ) {
+            mImageUri = data.getData();
+            profilePicture.setImageURI(mImageUri);
+        }
+
+    }
+
+    private void openImagesActivity() {
+        Intent intent = new Intent(this, ImagesActivity.class);
+        startActivity(intent);
     }
 
 
