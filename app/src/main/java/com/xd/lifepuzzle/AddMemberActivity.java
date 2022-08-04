@@ -240,6 +240,9 @@ public class AddMemberActivity extends AppCompatActivity implements View.OnClick
         // Creates new user
         //Member member = new Member(name.getText().toString(), relationship.getText().toString(), key);
 
+
+
+
         String memberName = editTextName.getText().toString().trim();
         String memberRelationship = editTextRelationship.getText().toString().trim();
 
@@ -258,6 +261,8 @@ public class AddMemberActivity extends AppCompatActivity implements View.OnClick
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Members");
+
+        Log.v("TAG", "member here");
 
         if ( mImageUri != null ) {
             // Toast.makeText(SignupActivity.this, "The mImageUri is not null", Toast.LENGTH_LONG).show();
@@ -291,13 +296,14 @@ public class AddMemberActivity extends AppCompatActivity implements View.OnClick
                                             myRef.child(key).setValue(member);
 
                                             // TODO: get user key
-                                            Bundle bundle = new Bundle();
-                                            bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
+                                            Log.v("TAG", "new user here");
+//                                            Bundle bundle = new Bundle();
+//                                            bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
 
                                             //uploadPicture(); // Maybe move this to when submit is clicked
 
                                             Intent intent = new Intent(AddMemberActivity.this, MainMenuActivity.class);
-                                            intent.putExtras(bundle);
+//                                            intent.putExtras(bundle);
                                             startActivity(intent);
 
                                         }
@@ -344,16 +350,16 @@ public class AddMemberActivity extends AppCompatActivity implements View.OnClick
 //
 //        FirebaseDatabase database = FirebaseDatabase.getInstance();
 //        DatabaseReference myRef = database.getReference("Members");
-
-//        How to push new user to database
+//
+////        How to push new user to database
 //        User user = new User("test 5", "18", "bob@gmail.com", "1234567", "Male");
-
+//
 //        String key = myRef.push().getKey();
 //        Member member = new Member(memberName, memberRelationship, key);
 //        //Member member = new Member(memberName, memberRelationship, key);
 //        myRef.child(key).setValue(member);
-
-        // Creates Unique ID per puzzle which can be used on puzzle selection
+//
+////         Creates Unique ID per puzzle which can be used on puzzle selection
 //        if ( MainMenuActivity.currentUserID != null ) {
 //            myRef.child(MainMenuActivity.currentUserID).child(name.getText().toString()).child(key).setValue(member);
 //        }
