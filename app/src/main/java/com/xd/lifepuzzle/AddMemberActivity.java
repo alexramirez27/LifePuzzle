@@ -52,9 +52,10 @@ public class AddMemberActivity extends AppCompatActivity implements View.OnClick
 
     // Firebase Objects
     //private FirebaseDatabase database;
-    private DatabaseReference mDatabaseRef;
+    //private DatabaseReference mDatabaseRef;
     // private DatabaseReference myRef;
 
+    DatabaseReference myRef;
     //private FirebaseStorage storage;
     private StorageReference mStorageRef;
 
@@ -84,8 +85,8 @@ public class AddMemberActivity extends AppCompatActivity implements View.OnClick
 
 
         // Maybe this should go above the try
-        mStorageRef = FirebaseStorage.getInstance().getReference("memberUploads"); // This means we will save it in a folder called uploads in our storage
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("memberUploads");
+        mStorageRef = FirebaseStorage.getInstance().getReference("memberPictures"); // This means we will save it in a folder called uploads in our storage
+        // mDatabaseRef = FirebaseDatabase.getInstance().getReference("memberUploads");
 
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar_member);
 
@@ -238,6 +239,25 @@ public class AddMemberActivity extends AppCompatActivity implements View.OnClick
         // Creates new user
         //Member member = new Member(name.getText().toString(), relationship.getText().toString(), key);
 
+        String memberName = editTextName.getText().toString().trim();
+        String memberRelationship = editTextRelationship.getText().toString().trim();
+
+
+        if(memberName.isEmpty()){
+            editTextName.setError("Name is required");
+            editTextName.requestFocus();
+            return;
+        }
+
+        if(memberRelationship.isEmpty()){
+            editTextRelationship.setError("Relationship is required");
+            editTextRelationship.requestFocus();
+            return;
+        }
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Members");
+
         if ( mImageUri != null ) {
             // Toast.makeText(SignupActivity.this, "The mImageUri is not null", Toast.LENGTH_LONG).show();
             StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
@@ -256,10 +276,28 @@ public class AddMemberActivity extends AppCompatActivity implements View.OnClick
                             }, 50);
 
                             Toast.makeText(AddMemberActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-                            Upload upload = new Upload(editTextName.getText().toString().trim(),
-                                    taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
-                            String uploadId = mDatabaseRef.push().getKey();
-                            mDatabaseRef.child(uploadId).setValue(upload);
+                            String tempImageUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+
+
+//                            Upload upload = new Upload(editTextName.getText().toString().trim(),
+//                                    taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+//                            String uploadId = myRef.push().getKey();
+//                            myRef.child(uploadId).setValue(upload);
+                            String key = myRef.push().getKey();
+                            Member member = new Member(memberName, memberRelationship, tempImageUrl, key);
+                            //Member member = new Member(memberName, memberRelationship, key);
+                            myRef.child(key).setValue(member);
+
+                            // TODO: get user key
+                            Bundle bundle = new Bundle();
+                            bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
+//
+//                          //uploadPicture(); // Maybe move this to when submit is clicked
+//
+                            Intent intent = new Intent(AddMemberActivity.this, MainMenuActivity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -280,32 +318,32 @@ public class AddMemberActivity extends AppCompatActivity implements View.OnClick
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
 
-        String memberName = editTextName.getText().toString().trim();
-        String memberRelationship = editTextRelationship.getText().toString().trim();
-
-
-        if(memberName.isEmpty()){
-            editTextName.setError("Name is required");
-            editTextName.requestFocus();
-            return;
-        }
-
-        if(memberRelationship.isEmpty()){
-            editTextRelationship.setError("Relationship is required");
-            editTextRelationship.requestFocus();
-            return;
-        }
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Members");
+//        String memberName = editTextName.getText().toString().trim();
+//        String memberRelationship = editTextRelationship.getText().toString().trim();
+//
+//
+//        if(memberName.isEmpty()){
+//            editTextName.setError("Name is required");
+//            editTextName.requestFocus();
+//            return;
+//        }
+//
+//        if(memberRelationship.isEmpty()){
+//            editTextRelationship.setError("Relationship is required");
+//            editTextRelationship.requestFocus();
+//            return;
+//        }
+//
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("Members");
 
 //        How to push new user to database
 //        User user = new User("test 5", "18", "bob@gmail.com", "1234567", "Male");
 
-        String key = myRef.push().getKey();
-        Member member = new Member(memberName, memberRelationship, key);
-        //Member member = new Member(memberName, memberRelationship, key);
-        myRef.child(key).setValue(member);
+//        String key = myRef.push().getKey();
+//        Member member = new Member(memberName, memberRelationship, key);
+//        //Member member = new Member(memberName, memberRelationship, key);
+//        myRef.child(key).setValue(member);
 
         // Creates Unique ID per puzzle which can be used on puzzle selection
 //        if ( MainMenuActivity.currentUserID != null ) {
@@ -313,15 +351,15 @@ public class AddMemberActivity extends AppCompatActivity implements View.OnClick
 //        }
 
 
-        // TODO: get user key
-        Bundle bundle = new Bundle();
-        bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
-//
-//        //uploadPicture(); // Maybe move this to when submit is clicked
-//
-        Intent intent = new Intent(this, MainMenuActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+//        // TODO: get user key
+//        Bundle bundle = new Bundle();
+//        bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
+////
+////        //uploadPicture(); // Maybe move this to when submit is clicked
+////
+//        Intent intent = new Intent(this, MainMenuActivity.class);
+//        intent.putExtras(bundle);
+//        startActivity(intent);
     }
 
     private void openFileChooser(Context context) {
