@@ -29,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -85,7 +86,7 @@ public class AddMemberActivity extends AppCompatActivity implements View.OnClick
 
 
         // Maybe this should go above the try
-        mStorageRef = FirebaseStorage.getInstance().getReference("memberPictures"); // This means we will save it in a folder called uploads in our storage
+        mStorageRef = FirebaseStorage.getInstance().getReference("MemberPictures"); // This means we will save it in a folder called uploads in our storage
         // mDatabaseRef = FirebaseDatabase.getInstance().getReference("memberUploads");
 
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar_member);
@@ -276,27 +277,34 @@ public class AddMemberActivity extends AppCompatActivity implements View.OnClick
                             }, 50);
 
                             Toast.makeText(AddMemberActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-                            String tempImageUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
 
+                            if (taskSnapshot.getMetadata() != null) {
+                                if (taskSnapshot.getMetadata().getReference() != null) {
+                                    Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                                    result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            String tempImageUrl = uri.toString();
 
-//                            Upload upload = new Upload(editTextName.getText().toString().trim(),
-//                                    taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
-//                            String uploadId = myRef.push().getKey();
-//                            myRef.child(uploadId).setValue(upload);
-                            String key = myRef.push().getKey();
-                            Member member = new Member(memberName, memberRelationship, tempImageUrl, key);
-                            //Member member = new Member(memberName, memberRelationship, key);
-                            myRef.child(key).setValue(member);
+                                            String key = myRef.push().getKey();
+                                            Member member = new Member(memberName, memberRelationship, tempImageUrl, key);
+                                            myRef.child(key).setValue(member);
 
-                            // TODO: get user key
-                            Bundle bundle = new Bundle();
-                            bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
-//
-//                          //uploadPicture(); // Maybe move this to when submit is clicked
-//
-                            Intent intent = new Intent(AddMemberActivity.this, MainMenuActivity.class);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
+                                            // TODO: get user key
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
+
+                                            //uploadPicture(); // Maybe move this to when submit is clicked
+
+                                            Intent intent = new Intent(AddMemberActivity.this, MainMenuActivity.class);
+                                            intent.putExtras(bundle);
+                                            startActivity(intent);
+
+                                        }
+                                    });
+                                }
+                            }
+
 
                         }
                     })

@@ -33,6 +33,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -326,22 +327,34 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             // Upload Object Below, we will comment it out for now
                             //Upload upload = new Upload(editTextName.getText().toString().trim(),
                             //taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
-                            String tempImageUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
 
+                            if (taskSnapshot.getMetadata() != null) {
+                                if (taskSnapshot.getMetadata().getReference() != null) {
+                                    Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                                    result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            String tempImageUrl = uri.toString();
 
-                            String key = myRef.push().getKey();
-                            User user = new User(fullName, age, email, phoneNo, finalGender, tempImageUrl, key);
-                            myRef.child(key).setValue(user);
+                                            String key = myRef.push().getKey();
+                                            User user = new User(fullName, age, email, phoneNo, finalGender, tempImageUrl, key);
+                                            myRef.child(key).setValue(user);
 
-                            // TODO: get user key
-                            Bundle bundle = new Bundle();
-                            bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
+                                            // TODO: get user key
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
 
-                            //uploadPicture(); // Maybe move this to when submit is clicked
+                                            //uploadPicture(); // Maybe move this to when submit is clicked
 
-                            Intent intent = new Intent(SignupActivity.this, MainMenuActivity.class);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
+                                            Intent intent = new Intent(SignupActivity.this, MainMenuActivity.class);
+                                            intent.putExtras(bundle);
+                                            startActivity(intent);
+
+                                        }
+                                    });
+                                }
+                            }
+
                             //String uploadId = myRef.push().getKey();
                             //myRef.child(uploadId).setValue(upload);
                         }
