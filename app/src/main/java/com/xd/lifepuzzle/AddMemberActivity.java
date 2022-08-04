@@ -113,14 +113,25 @@ public class AddMemberActivity extends AppCompatActivity {
 //         Creates Member which can be references on Main Menu
 //        myRef.child(name.getText().toString());
         // Creates Unique ID per puzzle which can be used on puzzle selection
-        if (MainMenuActivity.currentUserID != null){
-            Log.v("TAG", MainMenuActivity.currentUserID);
-            myRef.child(MainMenuActivity.currentUserID).child(name.getText().toString()).child(key).setValue(member);
+
+        if (Information.userID != null){
+            Log.v("TAG", Information.userID);
+            myRef.child(Information.userID).child(name.getText().toString()).child(key).setValue(member);
 //            myRef.setValue(MainMenuActivity.currentUserID);
 //            myRef.child(MainMenuActivity.currentUserID).setValue(name.getText().toString());
 //            myRef.child(MainMenuActivity.currentUserID).child(key).setValue(MainMenuActivity.currentUserID);
 
         }
+
+        // revert
+//        if (MainMenuActivity.currentUserID != null){
+//            Log.v("TAG", MainMenuActivity.currentUserID);
+//            myRef.child(MainMenuActivity.currentUserID).child(name.getText().toString()).child(key).setValue(member);
+////            myRef.setValue(MainMenuActivity.currentUserID);
+////            myRef.child(MainMenuActivity.currentUserID).setValue(name.getText().toString());
+////            myRef.child(MainMenuActivity.currentUserID).child(key).setValue(MainMenuActivity.currentUserID);
+//
+//        }
 
 
         Intent intent = new Intent(this, MainMenuActivity.class);

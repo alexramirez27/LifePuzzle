@@ -20,8 +20,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageView;
@@ -53,23 +56,34 @@ public class PuzzleActivity extends AppCompatActivity {
 
     private Chronometer chronometer;
 
+    private ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puzzle);
 
 
+        // background sound starts playing
+        /* music can be turned off anytime from Settings activity
+         * and will start playing on next Login */
+        /* music can be turned off anytime from Settings activity */
+        startService(new Intent(this, BackgroundsoundService.class));
+
         // Enable "up" on toolbar
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
         final RelativeLayout layout = findViewById(R.id.layout);
-        final ImageView imageView = findViewById(R.id.imageView);
+        imageView = findViewById(R.id.imageView);
+//        final ImageView imageView = findViewById(R.id.imageView);
 
         Intent intent = getIntent();
         final String assetName = intent.getStringExtra("assetName");
         mCurrentPhotoPath = intent.getStringExtra("mCurrentPhotoPath");
         mCurrentPhotoUri = intent.getStringExtra("mCurrentPhotoUri");
+
+
 
         chronometer = findViewById(R.id.chronometer);
         chronometer.setVisibility(View.GONE);
@@ -102,6 +116,54 @@ public class PuzzleActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // inflate the menu:
+        getMenuInflater().inflate(R.menu.menu_puzzle, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        switch(item.getItemId())
+        {
+            case R.id.settings:
+                goToSettingsActivity(item);
+                return true;
+            case R.id.hidePuzzle:
+                showHideCanvasImage(item);
+            default: return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /** called when the Settings icon is clicked from Actionbar */
+    public void goToSettingsActivity(MenuItem menuItem)
+    {
+        Intent intent = new Intent(PuzzleActivity.this, SettingsActivity.class);
+        startActivity(intent);
+        Toast.makeText(PuzzleActivity.this, "Redirecting to Settings",
+                Toast.LENGTH_SHORT).show();
+    }
+    /** called when the eye icon is clicked on Puzzle Activity */
+    public void showHideCanvasImage(MenuItem menuItem)
+    {
+        Log.v("TAG", "eye called");
+        if (menuItem.isChecked() == true)
+        {
+            imageView.setVisibility(View.VISIBLE);
+            menuItem.setIcon(R.drawable.ic_show_pwd);
+            menuItem.setChecked(false);
+        }
+        else
+        {
+            imageView.setVisibility(View.INVISIBLE);
+            menuItem.setIcon(R.drawable.ic_hide_pwd);
+            menuItem.setChecked(true);
+        }
     }
 
     private void setPicFromAsset(String assetName, ImageView imageView) {
@@ -345,37 +407,43 @@ public class PuzzleActivity extends AppCompatActivity {
             long elapsedMillis = (SystemClock.elapsedRealtime() - chronometer.getBase()) / 1000;
             Log.d("DEBUG", String.valueOf(elapsedMillis));
             // send elapsedMillis to database
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("Members").child(MainMenuActivity.currentUserID);
+            String name = "John Smith";
+            String relationship = "Friend";
+            String key = "-N8ElKSCa7PdVrwSSok2";
+            String completion = "completionTimes";
 
-            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("Members").child(Information.userID);
+            DatabaseReference puzzleRef = database.getReference("Members").child(Information.userID).child(name).child(key).child(completion);
+
+            // revert
+//            DatabaseReference myRef = database.getReference("Members").child(MainMenuActivity.currentUserID);
+//            DatabaseReference puzzleRef = database.getReference("Members").child(MainMenuActivity.currentUserID).child(name).child(key).child(completion);
+
+
+            List<Long> completionTime = new ArrayList<>();
+
+            puzzleRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String name = "John Smith";
-                    String relationship = "Friend";
-                    String key = "-N8ElKSCa7PdVrwSSok2";
-                    // TODO get current completionTime list from database
-                    List<Long> completionTime = new ArrayList<>();
+                    // adds currentCompletionTimeList
+                    // May be able to store this in puzzle Information and just add to it
+//                    List<Long> testTime = snapshot.child("completionTimes").getValue(List.class);
+//                    for (int i = 0; i < testTime.size(); i++){
+//                        Log.v("TAG", testTime.get(i).toString());
+//                    }
+                    for(DataSnapshot ds : snapshot.getChildren()) {
+                        completionTime.add(ds.getValue(Long.class));
+                    }
                     completionTime.add(elapsedMillis);
-
-//                    String key = myRef.push().getKey();
-                    // currentPuzzle data should be passed by intent or be public when selecting puzzle
-                    // Creates Member which can be references on Main Menu
                     Member member = new Member(name, relationship, key, completionTime);
-//                    myRef.child(name);
                     // Creates Unique ID per puzzle which can be used on puzzle selection
                     myRef.child(name).child(key).setValue(member);
 
+                    newActivity();
 
 
-//                    for(DataSnapshot ds : snapshot.getChildren()) {
-////                        Log.v("TAG", ds.child("completionTimes").getValue(List<Long>));
-////                        DataSnapshot dt = ds.child("completionTimes").getChildren();
-//                        completionTime.add(ds.child("completionTimes").getValue(List<Long>));
-//                        String temp = ds.child("name").getValue(String.class);
-//                        // gets list of all names
-//                        Log.v("TAG", temp);
-//                    }
+
                 }
 
                 @Override
@@ -384,10 +452,44 @@ public class PuzzleActivity extends AppCompatActivity {
                 }
             });
 
-            Intent intent = new Intent(this, AfterBeatingGameVideoActivity.class);
-            startActivity(intent);
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Log.v("TAG", "fourth ");
+//
+//
+////                    String key = myRef.push().getKey();
+//                    // currentPuzzle data should be passed by intent or be public when selecting puzzle
+//                    // Creates Member which can be references on Main Menu
+//
+//
+////            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+////                @Override
+////                public void onDataChange(@NonNull DataSnapshot snapshot) {
+////
+////
+////
+////
+////                @Override
+////                public void onCancelled(@NonNull DatabaseError error) {
+////
+////                }
+////            });
+//
+//
+//                }
+//            }, 2000);
+
+
+
 //            finish();
         }
+    }
+
+    private void newActivity() {
+        Intent intent = new Intent(this, AfterBeatingGameVideoActivity.class);
+        startActivity(intent);
     }
 
     //action after game over change here for display video page
