@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Member {
-    public String name, relationship, uniqueID;
+    public String name, relationship, imageUrl, uniqueID;
     public List<Long> completionTimes;
 
     // Picture format?
@@ -17,9 +17,10 @@ public class Member {
 
     }
 
-    public Member(String name, String relationship, String uniqueID) {
+    public Member(String name, String relationship, String imageUrl, String uniqueID) {
         this.name = name;
         this.relationship = relationship;
+        this.imageUrl = imageUrl;
         this.uniqueID = uniqueID;
         this.completionTimes = new ArrayList<>();
     }
@@ -27,6 +28,7 @@ public class Member {
     public Member(String name, String relationship, String uniqueID, List<Long> completionTime) {
         this.name = name;
         this.relationship = relationship;
+        // this.imageUrl = imageUrl;
         this.uniqueID = uniqueID;
         this.completionTimes = completionTime;
     }
