@@ -48,29 +48,29 @@
 
     </GridView>
 
-    <Button
-        android:id="@+id/difficult1"
+    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Easy"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/difficult2"/>
-
-    <Button
-        android:id="@+id/difficult2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/difficult3"/>
-
-    <Button
-        android:id="@+id/difficult3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hard"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/galleryButton"/>
+        android:id="@+id/radioGroupSetDifficulty">
+        <RadioButton
+            android:id="@+id/radioEasy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Easy"/>
+        <RadioButton
+            android:id="@+id/radioMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium"/>
+        <RadioButton
+            android:id="@+id/radioHard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hard"/>
+    </RadioGroup>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/cameraButton"
