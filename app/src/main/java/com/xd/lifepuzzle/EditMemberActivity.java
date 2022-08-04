@@ -17,7 +17,7 @@ public class EditMemberActivity extends AppCompatActivity {
 
     GridView gridView;
     List<String> names;
-//    String[] names;
+    //    String[] names;
     int[] images;
 
     @Override
