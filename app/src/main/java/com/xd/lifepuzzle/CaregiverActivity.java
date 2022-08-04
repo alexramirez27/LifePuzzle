@@ -2,10 +2,12 @@ package com.xd.lifepuzzle;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,12 +20,14 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -319,7 +323,34 @@ public class CaregiverActivity extends AppCompatActivity {
      */
 
     private void getUserInformation(){
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        //retrieve user image from Database
+        DatabaseReference imgRef = database.getReference("Users").child(currentUserID).child("imageUrl");
+
+        imgRef.addListenerForSingleValueEvent(new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot){
+
+                try {
+                    String imgUrl = dataSnapshot.getValue().toString();
+                    Log.v("DB", imgUrl);
+
+                    ImageView patientImageView = findViewById(R.id.patientImageView);
+                    Picasso.with(CaregiverActivity.this).load(imgUrl).into(patientImageView);
+                } catch(Exception e){
+                    Toast.makeText(CaregiverActivity.this,"No Patient Photo",Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError){
+                Toast.makeText(CaregiverActivity.this, "No patient Image", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        //retrieve user information from database
         DatabaseReference myRef = database.getReference("Users").child(currentUserID);
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -362,6 +393,7 @@ public class CaregiverActivity extends AppCompatActivity {
 
             }
         });
+
 
         // Delays the program. Makes sure that information is fetched before it is set
         //Calls setUserInformation()
