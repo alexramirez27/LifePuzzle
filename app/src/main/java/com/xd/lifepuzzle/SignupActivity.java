@@ -131,14 +131,11 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         });
 
         // Firebase Storage
-        //storage = FirebaseStorage.getInstance();
-
-
+        // storage = FirebaseStorage.getInstance();
 
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads"); // This means we will save it in a folder called uploads in our storage
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
-
 
 
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
@@ -177,6 +174,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         });
 
 
+        // Important buttons
         changeBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -188,12 +186,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
 
-        // Call Sign Up Button
-//        signUpBtn.setOnClickListener(v -> {
-//            if (v.getId() == R.id.signUpBtn) {
-//                signUpBtn(holder);
-//            }
-//        });
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,9 +198,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         signUpBtn(holder);
                     }
                 }
-//                    if ( v.getId() == R.id.signUpBtn ) {
-//                        signUpBtn(holder);
-//                    }
+
             }
         });
 
@@ -351,11 +341,13 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         myRef.child(key).setValue(user);
 
 
-        // TODO: get user key
+
         Bundle bundle = new Bundle();
         bundle.putString(LoginActivity.CURRENT_USER_KEY, key);
 
         //uploadPicture(); // Maybe move this to when submit is clicked
+
+        Information.userID = key;
 
         Intent intent = new Intent(this, MainMenuActivity.class);
         intent.putExtras(bundle);

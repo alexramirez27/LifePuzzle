@@ -16,14 +16,14 @@
         android:textSize="24sp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/photo"
+        app:layout_constraintEnd_toStartOf="@+id/memberPhoto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.08" />
 
-    <ImageView
-        android:id="@+id/photo"
-        android:onClick="onAddMemberPhotoClicked"
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/memberPhoto"
         android:layout_width="96dp"
         android:layout_height="95dp"
         android:src="@drawable/avatar_test"
@@ -32,8 +32,21 @@
         app:layout_constraintHorizontal_bias="0.904"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.088" />
+        app:layout_constraintVertical_bias="0.025">
 
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+    <Button
+        android:id="@+id/memberChangeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_blue"
+        android:text="@string/change"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/member_relation_text"
+        app:layout_constraintEnd_toEndOf="@+id/memberPhoto"
+        app:layout_constraintStart_toStartOf="@+id/memberPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/memberPhoto" />
 
     <EditText
         android:id="@+id/member_name"
@@ -42,7 +55,7 @@
         android:layout_marginHorizontal="30dp"
         android:hint="@string/member_edit_name"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/photo"
+        app:layout_constraintEnd_toStartOf="@+id/memberPhoto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/member_name_text"
         app:layout_constraintVertical_bias="0.011" />
@@ -93,7 +106,6 @@
         android:id="@+id/member_audio"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:onClick="onAddAudioMessageClicked"
         android:src="@drawable/audio"
         android:layout_marginLeft="270dp"
         app:layout_constraintBottom_toBottomOf="@+id/member_audio_text"
@@ -121,7 +133,6 @@
         android:id="@+id/member_video"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:onClick="onAddVideoClicked"
         android:layout_marginLeft="270dp"
         android:src="@drawable/video"
         app:layout_constraintBottom_toBottomOf="@+id/member_video_text"
@@ -130,8 +141,18 @@
         app:layout_constraintStart_toStartOf="@+id/member_video_text"
         app:layout_constraintTop_toTopOf="@+id/member_video_text" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar_member"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/member_video_text" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -150,7 +171,6 @@
             android:layout_marginRight="5dp"
             android:layout_weight="50"
             android:backgroundTint="@color/light_blue"
-            android:onClick="onSaveMemberClicked"
             android:text="@string/member_save"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -163,7 +183,6 @@
             android:layout_marginRight="10dp"
             android:layout_weight="50"
             android:backgroundTint="@color/dark_blue"
-            android:onClick="onDeleteMemberClicked"
             android:text="@string/member_delete"
             android:textColor="@color/black"
             android:textSize="16sp" />
